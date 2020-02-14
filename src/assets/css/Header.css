@@ -1,0 +1,30 @@
+.header{
+    height:100px;
+    background-color: #cf0a2c;
+}
+
+.logo{
+    width:88px;
+    margin-top:15px;
+    margin-left: 20%;
+}
+
+.padding-0{ padding-right:0; padding-left:0; } 
+
+
+
+.log{float: left;}
+
+.ayuda{float: right;
+       height:100px;
+  
+
+}
+
+.text{
+    margin-left:70%;
+    margin-top:30px ;
+    color: white;
+    font-size: 16px;
+   
+}

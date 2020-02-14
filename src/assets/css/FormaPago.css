@@ -1,0 +1,127 @@
+.contenedor{
+            height: 750px;
+            margin-top: 3%;
+            margin-right: auto;
+            margin-left: auto;
+            padding-left:0px;
+            padding-right:0px;
+    
+           
+  
+    }
+
+.izquierda{
+           height: 500px;
+           float: left;
+           margin-left: 7%;
+        }
+    
+.credito{
+          border-radius:10px;
+        }
+
+
+.efectivo{
+           margin-top: 20px;
+           border-radius:10px;
+           margin-bottom: 20px;
+         }
+
+.pse{
+      margin-top: 20px;
+      border-radius:10px;
+      }
+
+
+.tamano{height:70px;
+       }
+
+.tarjeta{height: 200px;     
+       }
+
+
+.contenido{
+   height: 200px;
+   float: left;
+
+}
+
+.imagen{
+    height: 200px;
+    float: right;}
+
+.color{
+      background-color: white;
+      }
+
+.titulo{ font-size: 1.5rem;
+         color: #666;
+         font-weight: 500;}
+
+.input-group{width:200px}
+
+.img-credito{
+              width: 200px;
+              margin-left:-13px;}
+
+.cred{height: 500px;}
+
+.efecty{
+        float: left;}
+
+.baloto{
+        float: right;}
+
+.img-efecty{width:250px ;
+margin-left:10%;}
+
+.img-baloto{width: 250px;
+      margin-left:10%}
+
+
+.cero{
+        border-bottom: 1px solid #E1E8DF;
+	cursor:pointer;
+	font-weight:bold;
+	padding:0.2em 0;
+        outline:none;
+        box-shadow: none;
+        }
+
+
+button{cursor:pointer;
+	
+	padding:0.2em 0;
+        outline:none;
+        box-shadow: none;
+        background-color: white;}
+
+.terminos{
+          height: 200px;
+          background-color: white;
+          margin-top:20px;
+}
+
+.persona{
+         float: left;}
+
+.di{
+     float: right;}
+
+.condiciones{text-align: center;}
+
+.month{float: left;}
+.an{float: right;}
+
+
+.cv{float: right;
+}
+.cuotas{
+
+float: right;}
+
+.doc{
+float: left;
+}
+
+.f{background-color: cadetblue;}
