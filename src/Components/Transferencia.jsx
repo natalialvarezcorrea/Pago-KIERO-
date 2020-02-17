@@ -109,6 +109,7 @@ class Transferencia extends React.Component{
            
             </Card.Body>
             </Accordion.Collapse>
+           
         </Card>
         )
     }
