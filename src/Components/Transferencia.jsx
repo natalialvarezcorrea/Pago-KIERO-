@@ -48,7 +48,7 @@ axios.get(`http://localhost:5000/payment_cc`) /*Here must be the correct endpoin
                                   <select id="inputState" className="form-control sel"  >
                                   
                                   <option selected>Busca tu Banco</option>
-                                 
+                                { /* change the params id for the description*/}
                                   {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option>{bank.id}</option>)}
                                   {/* <option>BANCO AGRARIO</option>
                                   <option>BANCO AV VILLAS</option>
