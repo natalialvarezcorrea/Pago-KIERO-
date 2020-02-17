@@ -21,11 +21,6 @@
      
         }
 
-.cred{
-        text-align: center;
-        
-margin-left: -15px;
-float: left;}
 
 
 .efectivo{
@@ -48,8 +43,9 @@ float: left;}
 
 
 .contenido{
-   height: 200px;
+   height: 600px;
    float: left;
+  
 
 }
 
@@ -67,8 +63,9 @@ float: left;}
 
 
 
-.cred{height: 500px;
-float: left;}
+.cred{height: 830px;
+float: left;
+text-align: center;}
 
 .efecty{
         float: left;}
@@ -114,25 +111,33 @@ button{cursor:pointer;
 
 .condiciones{text-align: center;}
 
-.month{float: left;}
+.month{float: left;
+}
+
+
+
 .an{float: right;}
 
 
 .cv{float: right;
 }
 .cuotas{
-
 float: right;}
 
 .doc{
 float: left;
 }
 
-.f{background-color: cadetblue;}
+.f{background-color: cadetblue;
+margin-left: -8px;}
 
 .n{
-     margin-top: 30px;
+     
+   
 float: right;}
 
-.collap{height: 700px !important;
+.collap{height: 1030px !important;
 background-color: white;}
+
+.cont{
+height: 500px;}

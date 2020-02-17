@@ -1,8 +1,9 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import { Button,Card } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form'
-import '../assets/css/FormaPago.css'
+import Form from 'react-bootstrap/Form';
+import '../assets/css/FormaPago.css';
+import Modalbutton from '../Components/Modal';
 
 
 class Transferencia extends React.Component{
@@ -20,7 +21,7 @@ class Transferencia extends React.Component{
             
             <Accordion.Collapse eventKey="2">
             <Card.Body>
-
+<form>
             <div class="form-group col-12">
                                   <label for="inputState " className='tes'>BANCOS</label>
                                   <select id="inputState" className="form-control sel"  >
@@ -96,6 +97,9 @@ class Transferencia extends React.Component{
                 </div>
 
 
+                <Modalbutton/>
+
+                </form>
            
             </Card.Body>
             </Accordion.Collapse>

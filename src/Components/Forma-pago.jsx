@@ -7,7 +7,7 @@ import { Button,Card } from 'react-bootstrap';
 import img from '../assets/img/card-credit.png'
 import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
-import { MDBRow, MDBCol, MDBBtn } from "mdbreact";
+import Modalbutton from '../Components/Modal';
 
 
 class FormaPago extends React.Component{
@@ -19,7 +19,7 @@ class FormaPago extends React.Component{
     email: "",
     city: "",
     state: "",
-    zip: ""
+    zip: "",
   };
 
   submitHandler = event => {
@@ -31,7 +31,10 @@ class FormaPago extends React.Component{
     this.setState({ [event.target.name]: event.target.value });
   };
 
+  
+
     render(){
+      const { open } = this.state;
         return(
             <div className='container-fluid'>
                 <div className="row-fluid">
@@ -101,7 +104,7 @@ class FormaPago extends React.Component{
                                                                         </select>
                                                                         </div>
                                                                       <div class="form-group an col-lg-4 col-sm-12 sele">
-                                                                      <select id="year" name="year" class="select_year cart_select italic light" class="form-control ml-2" required>
+                                                                      <select id="year" name="year" class="select_year cart_select italic light" class="form-control ml-" required>
                                                                             <option selected hidden>Año</option> 
                                                                             <option value="2018">2018</option> 
                                                                             <option value="2017">2017</option> 
@@ -205,10 +208,10 @@ class FormaPago extends React.Component{
 
                                                                       </div>
                                                                       
-                                                                      <div className='f'>                                                                        
-                                                                        <div class="form-group col-7 doc">
+                                                                                                                                             
+                                                                        <div className="form-group col-lg-7 col-sm-12 doc">
                                                                           <label for="inputState"></label>
-                                                                          <select id="inputState" class="form-control">
+                                                                          <select id="inputState" className="form-control ">
                                                                             <option selected>Tipo Documento*</option>
                                                                             <option>CN</option>
                                                                             <option>CC</option>
@@ -216,9 +219,9 @@ class FormaPago extends React.Component{
                                                                            </select>
                                                                         </div>
 
-                                                                        <div class="form-group col-5 cuotas">
+                                                                        <div className="form-group col-lg-5 col-sm-12 cuotas ">
                                                                           <label for="inputState"></label>
-                                                                          <select id="inputState" className="form-control sel" required >
+                                                                          <select id="inputState" className="form-control sel   " required >
                                                                             <option selected>Cuotas*</option>
                                                                             <option>1</option>
                                                                             <option>2</option>
@@ -243,7 +246,7 @@ class FormaPago extends React.Component{
                                                                         </div>
 
                                                                        
-                                                                        </div>
+                                                                     
 
 
 
@@ -269,7 +272,7 @@ class FormaPago extends React.Component{
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Email*" required/>
+                                                                          <input class="form-control" type="text" placeholder="Ciudad*" required/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
@@ -289,7 +292,19 @@ class FormaPago extends React.Component{
                                                                       </div>
 
 
-                                                                    
+                                                                      <div class="form-group col-lg-12  col-sm-12 doc">
+                                                                          <label for="inputState"></label>
+                                                                          <select id="inputState" class="form-control">
+                                                                            <option selected>Tipo Tarjeta*</option>
+                                                                            <option>VISA</option>
+                                                                            <option>MASTERCARD</option>
+                                                                            <option>DINNERS</option>
+                                                                            <option>CRM</option>
+                                                                           </select>
+                                                                        </div>
+
+                                                                      <Modalbutton/>
+                                                                       
 
                                                                       </form> 
                                                          
@@ -304,7 +319,7 @@ class FormaPago extends React.Component{
                                                </div>
 
 
-                                               <div className='col-lg-4 col-md-12 col-sm-2  n'>
+                                               <div className='col-lg-4 col-md-5 col-sm-2 mt-5 n'>
                                                         <img className='img-fluid' src={img}/>   
                                                </div>
                                                </div>
