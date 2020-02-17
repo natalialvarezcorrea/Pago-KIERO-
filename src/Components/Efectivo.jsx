@@ -21,10 +21,10 @@ class Efectivo extends React.Component{
             <Accordion.Collapse eventKey="1">
             <Card.Body>
               <div className='efecty col-6'>
-                <a href=''> <img className='img-efecty' src={efecty}/> </a>
+                <a href=''> <img className='img-efecty img-fluid' src={efecty}/> </a>
               </div>
               <div className='baloto col-6'>
-              <a href=''> <img className='img-baloto' src={baloto}/> </a>
+              <a href=''> <img className='img-baloto img-fluid' src={baloto}/> </a>
               </div>
             </Card.Body>
             </Accordion.Collapse>

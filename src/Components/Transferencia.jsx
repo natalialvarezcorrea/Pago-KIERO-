@@ -10,6 +10,8 @@ class Transferencia extends React.Component{
 
     render(){
         return(
+
+          <div>
             <Card>
                                                   
             <Accordion.Toggle as={Card.Header} variant="link" eventKey="2" className='tamano '>
@@ -20,9 +22,9 @@ class Transferencia extends React.Component{
             <Card.Body>
 
             <div class="form-group col-12">
-                                  <label for="inputState " className='tes'>TIPO DE PERSONA</label>
+                                  <label for="inputState " className='tes'>BANCOS</label>
                                   <select id="inputState" className="form-control sel"  >
-                                  <option selected>Persona Natural</option>
+                                  <option selected>Busca tu Banco</option>
                                     <option>BANCO AGRARIO</option>
                                   <option>BANCO AV VILLAS</option>
                                   <option>BANCO BBVA COLOMBIA S.A</option>
@@ -90,19 +92,7 @@ class Transferencia extends React.Component{
                 
 
 
-                  <Form className='condiciones '>
-                      {['checkbox'].map(type => (
-                        <div key={`custom-${type}`} >
-                          <Form.Check 
-                            custom
-                            type={type}
-                            id={`custom-${type}`}
-                            label={`Terminos y condiciones`}
-                          />
-                        </div>
-                      ))}
-                    </Form>
-                  <button type="button" class="btn btn-danger btn-sm btn-block">Continuar</button>
+                
                 </div>
 
 
@@ -110,6 +100,8 @@ class Transferencia extends React.Component{
             </Card.Body>
             </Accordion.Collapse>
         </Card>
+
+        </div>
         )
     }
 }
