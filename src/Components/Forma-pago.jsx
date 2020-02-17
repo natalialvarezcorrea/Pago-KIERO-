@@ -113,7 +113,7 @@ class FormaPago extends React.Component {
                                 </select>
                               </div>
                               <div class="form-group an col-4">
-                                <select id="year" name="year" class="select_year cart_select italic light" class="form-control ml-2" >
+                                <select id="year" name="year" class="select_year cart_select italic light" class="form-control ml-2">
                                   <option selected hidden>Año</option>
                                   <option value="2018">2018</option>
                                   <option value="2017">2017</option>
