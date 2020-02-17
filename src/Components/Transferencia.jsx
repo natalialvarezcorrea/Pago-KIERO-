@@ -4,10 +4,30 @@ import { Button,Card } from 'react-bootstrap';
 import Form from 'react-bootstrap/Form';
 import '../assets/css/FormaPago.css';
 import Modalbutton from '../Components/Modal';
+import axios from 'axios'
 
 
 class Transferencia extends React.Component{
 
+  constructor(){
+    super()
+    this.state = {
+        items: {},
+    }
+}
+
+
+componentDidMount(){
+axios.get(`http://localhost:5000/payment_cc`) /*Here must be the correct endpoint */
+ .then(res => {
+     //console.log(res.data)
+     this.setState({items:res.data});
+     
+ })
+ .catch(err => {
+     console.log(err)
+ })
+}
 
     render(){
         return(
@@ -21,12 +41,16 @@ class Transferencia extends React.Component{
             
             <Accordion.Collapse eventKey="2">
             <Card.Body>
+            
 <form>
             <div class="form-group col-12">
                                   <label for="inputState " className='tes'>BANCOS</label>
                                   <select id="inputState" className="form-control sel"  >
+                                  
                                   <option selected>Busca tu Banco</option>
-                                    <option>BANCO AGRARIO</option>
+                                 
+                                  {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option>{bank.id}</option>)}
+                                  {/* <option>BANCO AGRARIO</option>
                                   <option>BANCO AV VILLAS</option>
                                   <option>BANCO BBVA COLOMBIA S.A</option>
                                   <option>BANCO CAJA SOCIAL</option>
@@ -48,10 +72,8 @@ class Transferencia extends React.Component{
                                   <option>COOPERATIVA FINANCIERA DE ANTIOQUIA</option>
                                   <option>DAVIPLATA</option>
                                   <option>NEQUI</option>
-                                  <option>SCOTIABANK COLPATRIA</option>
+                                  <option>SCOTIABANK COLPATRIA</option> */}
 
-                                   
-                                
                                   </select>
                                 </div>
 
