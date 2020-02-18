@@ -7,7 +7,7 @@ import { Card } from 'react-bootstrap';
 import img from '../assets/img/card-credit.png'
 import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
-import Modalbutton from '../Components/Modal';
+
 import axios from 'axios';
 
 
@@ -88,9 +88,9 @@ class FormaPago extends React.Component{
 
                                                             
                                                           <form
-                                                                  className="needs-validation"
+                                                                  className="was-validate"
                                                                   onSubmit={this.submitHandler}
-                                                                  noValidate
+                                                      
                                                                 >
 
 
@@ -327,7 +327,7 @@ class FormaPago extends React.Component{
                                                                            </select>
                                                                         </div>
 
-                                                                        <Modalbutton/>
+                                                                        <button type="submit" className="btn btn-outline-danger btn-block mt-3">Enviar</button>
 
                                                                       </form> 
                                                          
