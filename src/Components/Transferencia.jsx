@@ -18,7 +18,7 @@ class Transferencia extends React.Component{
 
 
 componentDidMount(){
-axios.get(`http://localhost:5000/payment_cc`) /*Here must be the correct endpoint */
+axios.get(`https://kieroapi.net/payment_pse/`) /*Here must be the correct endpoint */
  .then(res => {
      //console.log(res.data)
      this.setState({items:res.data});

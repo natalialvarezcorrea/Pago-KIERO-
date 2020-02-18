@@ -33,49 +33,34 @@ class FormaPago extends React.Component{
         user_id : '',
         address_id : '',
         device_session_id : '',
+        cuotas:''
       };
   }
   
   
-  submitHandler = event => {
-    event.preventDefault();
-    event.target.className += " was-validated";
+ submitHandler = e => {
+    e.preventDefault();
+   console.log(this.state)
+   
+   axios.post('https://kieroapi.net/payment_pse/', this.state)
+  .then((response) => {
+    console.log(response);
+  }, (error) => {
+    console.log(error);
+  });
+
   };
 
-  changeHandler = event => {
-    this.setState({ [event.target.name]: event.target.value });
+  changeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
    
-  onSubmit(){
-    axios.post('http://10.4.28.184:5000/payment_cc',{
-      card_number : "",
-      ccv : '',
-      expiration_dateEmail : '',
-      card_holder : '',
-      card_type: '',
-      payer_fullname: '',
-      payer_email : '',
-      payer_phone : '',
-      payer_document_number : '',
-      payer_document_type : '',
-      payer_addr1 : '',
-      payer_addr2 : '',
-      payer_city : '',
-      payer_department : '',
-      user_id : '',
-      address_id : '',
-      device_session_id : '',
-    })
-    .then((response) => {
-      console.log(response);
-    }, (error) => {
-      console.log(error);
-    });
-     
-  }
+ 
+  
 
     render(){
-      const { open } = this.state;
+      
+      const {card_number,ccv,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,payer_addr1,payer_city,payer_department,cuotas,expiration_dateEmail}=this.state;
         return(
             <div className='container-fluid'>
                 <div className="row-fluid">
@@ -112,14 +97,14 @@ class FormaPago extends React.Component{
 
 
                                                                       <div className="input-group mr-5">
-                                                                          <input class="form-control" type="text" placeholder="Numero tarjeta*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='card_number' value={card_number} placeholder="Numero tarjeta*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                             
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Nombre y Apelido*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" name="payer_fullname" value={payer_fullname} type="text" placeholder="Nombre y Apelido*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                             
                                                                           </div>
@@ -128,7 +113,7 @@ class FormaPago extends React.Component{
                                                                       <div className=" mt-3">
 
                                                                       <div class="form-group col-lg-4 col-sm-12 month sele">
-                                                                      <select id="month" name="month" class="select_month cart_select italic light" class="form-control"  required onChange={this.changeHandler}>
+                                                                      <select id="month" name="expiration_dateEmail" value={expiration_dateEmail} class="select_month cart_select italic light" class="form-control"  required onChange={this.changeHandler}>
                                                                         
                                                                         <option value="01">Enero</option> 
                                                                         <option value="02">Febrero</option> 
@@ -145,7 +130,7 @@ class FormaPago extends React.Component{
                                                                         </select>
                                                                         </div>
                                                                       <div class="form-group an col-lg-4 col-sm-12 sele">
-                                                                      <select id="year" name="year" class="select_year cart_select italic light" class="form-control ml-" required onChange={this.changeHandler}>
+                                                                      <select id="year" name="expiration_dateEmail" value={expiration_dateEmail} class="select_year cart_select italic light" class="form-control ml-" required onChange={this.changeHandler}>
                                                                             <option selected hidden>Año</option> 
                                                                             <option value="2018">2018</option> 
                                                                             <option value="2017">2017</option> 
@@ -241,7 +226,7 @@ class FormaPago extends React.Component{
                                                                           
                                                                       
                                                                       <div className="input-group col-lg-4 col-sm-12 cv sele ">
-                                                                          <input class="form-control" type="text" placeholder="CVV" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='ccv' value={ccv} placeholder="CVV" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                     
                                                                           </div>
@@ -252,7 +237,7 @@ class FormaPago extends React.Component{
                                                                                                                                              
                                                                         <div className="form-group col-lg-7 col-sm-12 doc">
                                                                           <label for="inputState"></label>
-                                                                          <select id="inputState" className="form-control " onChange={this.changeHandler}>
+                                                                          <select id="inputState" className="form-control " name='payer_document_type' value={payer_document_type} onChange={this.changeHandler}>
                                                                             <option selected>Tipo Documento*</option>
                                                                             <option>CN</option>
                                                                             <option>CC</option>
@@ -262,7 +247,7 @@ class FormaPago extends React.Component{
 
                                                                         <div className="form-group col-lg-5 col-sm-12 cuotas ">
                                                                           <label for="inputState"></label>
-                                                                          <select id="inputState" className="form-control sel   " required  onChange={this.changeHandler}>
+                                                                          <select id="inputState" className="form-control sel" name='cuotas' value={cuotas} required  onChange={this.changeHandler}>
                                                                             <option selected>Cuotas*</option>
                                                                             <option>1</option>
                                                                             <option>2</option>
@@ -292,41 +277,41 @@ class FormaPago extends React.Component{
 
 
                                                                         <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Numero documento*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name="payer_document_number" value={payer_document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Email*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name="payer_email" vaue={payer_email} placeholder="Email*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Telefono*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='payer_phone' value={payer_phone} placeholder="Telefono*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Ciudad*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='payer_city' value={payer_city} placeholder="Ciudad*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Direccion*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='payer_addr1' value={payer_addr1} placeholder="Direccion*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input class="form-control" type="text" placeholder="Departamento*" required onChange={this.changeHandler}/>
+                                                                          <input class="form-control" type="text" name='payer_department' value={payer_department} placeholder="Departamento*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
@@ -335,7 +320,7 @@ class FormaPago extends React.Component{
 
                                                                       <div class="form-group col-lg-12  col-sm-12 doc">
                                                                           <label for="inputState"></label>
-                                                                          <select id="inputState" class="form-control" onChange={this.changeHandler}>
+                                                                          <select id="inputState" class="form-control" name="card_type" value={card_type} onChange={this.changeHandler}>
                                                                             <option selected>Tipo Tarjeta*</option>
                                                                             <option>VISA</option>
                                                                             <option>MASTERCARD</option>
