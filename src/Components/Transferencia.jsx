@@ -1,7 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion'
-import { Button,Card } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
+import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import Modalbutton from '../Components/Modal';
 import axios from 'axios'
@@ -13,23 +12,44 @@ class Transferencia extends React.Component{
     super()
     this.state = {
         items: {},
+        person_type:'',
+        document_type:'',
+        document_number:'',
+        bank_id:''
     }
 }
 
 
-componentDidMount(){
-axios.get(`https://kieroapi.net/payment_pse/`) /*Here must be the correct endpoint */
- .then(res => {
-     //console.log(res.data)
-     this.setState({items:res.data});
-     
- })
- .catch(err => {
-     console.log(err)
- })
-}
+  componentDidMount(){
+  axios.get(`http://10.4.28.184:5000/payment_cc`) /*Here must be the correct endpoint */
+  .then(res => {
+      this.setState({items:res.data});
+  })
+  .catch(err => {
+      console.log(err)
+  })
+  }
 
+submitHandler = e => {
+        e.preventDefault();
+     
+       /*Here must be the correct endpoint */
+      axios.post('http://10.4.28.184:5000/payment_cc', this.state)
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
+
+    };
+
+changeHandler = e => {
+  this.setState({ [e.target.name]: e.target.value });
+};
+ 
     render(){
+      const{person_type,document_type,document_number,bank_id}=this.state;
+
         return(
 
           <div>
@@ -42,64 +62,34 @@ axios.get(`https://kieroapi.net/payment_pse/`) /*Here must be the correct endpoi
             <Accordion.Collapse eventKey="2">
             <Card.Body>
             
-<form>
-            <div class="form-group col-12">
-                                  <label for="inputState " className='tes'>BANCOS</label>
-                                  <select id="inputState" className="form-control sel"  >
+<form
+      className="needs-validation"
+      onSubmit={this.submitHandler}
+      noValidate>
+            <div className="form-group col-12">
+                                  <label htmlFor="inputState " className='tes'>BANCOS</label>
+                                  <select id="inputState" className="form-control sel" name='bank_id' value={bank_id} onChange={this.changeHandler} required >
                                   
-                                  <option selected>Busca tu Banco</option>
+                                  <option defaultValue>Busca tu Banco</option>
                                 { /* change the params id for the description*/}
-                                  {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option>{bank.id}</option>)}
-                                  {/* <option>BANCO AGRARIO</option>
-                                  <option>BANCO AV VILLAS</option>
-                                  <option>BANCO BBVA COLOMBIA S.A</option>
-                                  <option>BANCO CAJA SOCIAL</option>
-                                  <option>BANCO COOPERATIVO COOPCENTRAL</option>
-                                  <option>BANCO DAVIVIENDA</option>
-                                  <option>BANCO DE BOGOTA</option>
-                                  <option>BANCO DE OCCIDENTE</option>
-                                  <option>BANCO FALABELLA</option>
-                                  <option>BANCO GNB SUDAMERIS</option>
-                                  <option>BANCO ITAU</option>
-                                  <option>BANCO PICHINCHA S.A</option>
-                                  <option>BANCO POPOULAR</option>
-                                  <option>BANCO PROCREDIT</option>
-                                  <option>BANCO SANTANDER COLOMBIA</option>
-                                  <option>BANCO SERFINANZA</option>
-                                  <option>BANCOLOMBIA</option>
-                                  <option>CITIBANK</option>
-                                  <option>CONFIAR COOPERATIVA FINANCIERA</option>
-                                  <option>COOPERATIVA FINANCIERA DE ANTIOQUIA</option>
-                                  <option>DAVIPLATA</option>
-                                  <option>NEQUI</option>
-                                  <option>SCOTIABANK COLPATRIA</option> */}
+                                  {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option key={bank.id} value={bank.id}>{bank.description}</option>  )}
+                                 
 
                                   </select>
                                 </div>
 
-         
-           
-
-                <div className='terminos'>
-
-                 
-
-                               <div class="form-group col-12">
-                                  <label for="inputState " className='tes'>TIPO DE PERSONA</label>
-                                  <select id="inputState" className="form-control sel"  >
-                                  <option selected>Persona Natural</option>
+                               <div className="form-group col-12">
+                                  <label htmlFor="inputState " className='tes' >TIPO DE PERSONA</label>
+                                  <select id="inputState" className="form-control sel" name='person_type' value={person_type} onChange={this.changeHandler} required>
+                                  <option defaultValue>Persona Natural</option>
                                     <option>Persona juridica</option>
                                   </select>
                                 </div>
                
-
-
-                
-                  <div class="form-group col-12">
-                                  <label for="inputState " className='tes'>DOCUMENTO DE IDENTIFICACION</label>
-                                  <select id="inputState" className="form-control sel"  >
-                                  <option selected>Cedula de ciudadania.</option>
-                                    <option>Cedula de ciudadania.</option>
+                  <div className="form-group col-12">
+                                  <label htmlFor="inputState " className='tes' >DOCUMENTO DE IDENTIFICACION</label>
+                                  <select id="inputState" className="form-control sel" name='document_type' value={document_type} onChange={this.changeHandler} required>
+                                  <option defaultValue>Cedula de ciudadania.</option>
                                     <option>Numero de identificacion Tributario.</option>
                                     <option>Tarjeta de Identidad</option>
                                     <option>Pasaporte.</option>
@@ -111,18 +101,15 @@ axios.get(`https://kieroapi.net/payment_pse/`) /*Here must be the correct endpoi
                                   </select>
                                 </div>
 
-                 
-                
 
+                                <input className="form-control" type="text" name="document_number" value={document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
 
-                
-                </div>
-
-
+          
                 <Modalbutton/>
 
                 </form>
-           
+              
+
             </Card.Body>
             </Accordion.Collapse>
         </Card>

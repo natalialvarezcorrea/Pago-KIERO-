@@ -11,7 +11,7 @@ class Header extends React.Component{
 
               <div className='header col-12'>
                   <div className=' log col-6'>
-                  <img src={logo} className='mt-3 ml-5'/>
+                  <img src={logo} alt = '' className='mt-3 ml-5'/>
                   </div >
                   <div className=' ayuda col-6'>
                       <p className="text">Ayuda</p>

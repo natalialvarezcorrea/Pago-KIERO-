@@ -33,11 +33,11 @@ render(){
                <div className='uno col-6'>
                    <form>
                    <p>Agregar direccion de envio</p>
-           <input class="form-control " type="text" placeholder="Nombre y apellido*" required />
-           <input class="form-control mt-3" type="text" placeholder="Telefono*" required />
-           <input class="form-control mt-3" type="text" placeholder="barrio*" required />
-           <input class="form-control mt-3" type="text" placeholder="direccion*" required />
-           <input class="form-control mt-3" type="text" placeholder="Ciudad*" required />
+           <input className="form-control " type="text" placeholder="Nombre y apellido*" required />
+           <input className="form-control mt-3" type="text" placeholder="Telefono*" required />
+           <input className="form-control mt-3" type="text" placeholder="barrio*" required />
+           <input className="form-control mt-3" type="text" placeholder="direccion*" required />
+           <input className="form-control mt-3" type="text" placeholder="Ciudad*" required />
 
            <button type="submit" className="btn btn-outline-danger btn-block mt-3">Comprar</button>
 
