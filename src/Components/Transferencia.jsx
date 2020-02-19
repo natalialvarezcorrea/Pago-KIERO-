@@ -2,7 +2,6 @@ import React from 'react';
 import Accordion from 'react-bootstrap/Accordion'
 import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
-import Modalbutton from '../Components/Modal';
 import axios from 'axios'
 
 
@@ -65,7 +64,7 @@ changeHandler = e => {
 <form
       className="needs-validation"
       onSubmit={this.submitHandler}
-      noValidate>
+      >
             <div className="form-group col-12">
                                   <label htmlFor="inputState " className='tes'>BANCOS</label>
                                   <select id="inputState" className="form-control sel" name='bank_id' value={bank_id} onChange={this.changeHandler} required >
@@ -86,7 +85,7 @@ changeHandler = e => {
                                   </select>
                                 </div>
                
-                  <div className="form-group col-12">
+                                 <div className="form-group col-12">
                                   <label htmlFor="inputState " className='tes' >DOCUMENTO DE IDENTIFICACION</label>
                                   <select id="inputState" className="form-control sel" name='document_type' value={document_type} onChange={this.changeHandler} required>
                                   <option defaultValue>Cedula de ciudadania.</option>
@@ -101,11 +100,12 @@ changeHandler = e => {
                                   </select>
                                 </div>
 
-
-                                <input className="form-control" type="text" name="document_number" value={document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
-
+                                <div className="form-group col-12">
+                                <input className="form-control col-12" type="text" name="document_number" minLength='10' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
+                                </div>
+                                <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
           
-                <Modalbutton/>
+                
 
                 </form>
               

@@ -7,7 +7,6 @@ import { Card } from 'react-bootstrap';
 import img from '../assets/img/card-credit.png'
 import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
-
 import axios from 'axios';
 
 
@@ -85,7 +84,7 @@ class FormaPago extends React.Component{
                                               
                                                         <div className='tarjeta col-12'>
                                                           <div className='col-12 contenido'>
-
+                                    
                                                             
                                                           <form
                                                                   className="was-validate"
@@ -95,7 +94,7 @@ class FormaPago extends React.Component{
 
 
                                                                       <div className="input-group mr-5">
-                                                                          <input className="form-control" type="number" name='card_number' value={card_number} placeholder="Numero tarjeta*" required onChange={this.changeHandler}/>
+                                                                       <input className="form-control" name='card_number' type='number' value={card_number}  placeholder="Numero tarjeta*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                             
                                                                           </div>
@@ -224,7 +223,7 @@ class FormaPago extends React.Component{
                                                                           
                                                                       
                                                                       <div className="input-group col-lg-4 col-sm-12 cv sele ">
-                                                                          <input className="form-control" type="text" name='ccv' value={ccv} placeholder="CVV" required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="number"  name='ccv' value={ccv} placeholder="CVV" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                     
                                                                           </div>
@@ -275,21 +274,21 @@ class FormaPago extends React.Component{
 
 
                                                                         <div className="input-group mt-2">
-                                                                          <input className="form-control" type="text" name="payer_document_number" value={payer_document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="number" name="payer_document_number" value={payer_document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input className="form-control" type="text" name="payer_email" vaue={payer_email} placeholder="Email*" required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="email" name="payer_email" vaue={payer_email} placeholder="Email*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input className="form-control" type="text" name='payer_phone' value={payer_phone} placeholder="Telefono*" required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="number" name='payer_phone' value={payer_phone} placeholder="Telefono*" required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                      
                                                                           </div>
@@ -327,10 +326,10 @@ class FormaPago extends React.Component{
                                                                            </select>
                                                                         </div>
 
-                                                                        <button type="submit" className="btn btn-outline-danger btn-block mt-3">Enviar</button>
+                                                                        <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
 
                                                                       </form> 
-                                                         
+                                                                
 
                                                           </div>
                                                         
@@ -355,7 +354,7 @@ class FormaPago extends React.Component{
                               </div>
 
 
-                              <div className='pse mt-5'>
+                              <div className='pse '>
                                                <Transferencia/>
                                 </div>
                                
