@@ -21,7 +21,7 @@ class Transferencia extends React.Component{
 
 
   componentDidMount(){
-  axios.get(`http://10.4.28.184:5000/payment_cc`) /*Here must be the correct endpoint */
+  axios.get(`https://kieroapi.net/pse_banks`) /*Here must be the correct endpoint */
   .then(res => {
       this.setState({items:res.data});
   })
@@ -34,7 +34,7 @@ submitHandler = e => {
         e.preventDefault();
      
        /*Here must be the correct endpoint */
-      axios.post('http://10.4.28.184:5000/payment_cc', this.state)
+      axios.post('https://kieroapi.net/pse_payment', this.state)
       .then((response) => {
         console.log(response);
       }, (error) => {
@@ -70,7 +70,7 @@ changeHandler = e => {
                                   <label htmlFor="inputState " className='tes'>BANCOS</label>
                                   <select id="inputState" className="form-control sel" name='bank_id' value={bank_id} onChange={this.changeHandler} required >
                                   
-                                  <option defaultValue>Busca tu Banco</option>
+                                  
                                 { /* change the params id for the description*/}
                                   {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option key={bank.id} value={bank.id}>{bank.description}</option>  )}
                                  
