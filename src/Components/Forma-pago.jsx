@@ -41,8 +41,7 @@ class FormaPago extends React.Component{
  submitHandler = e => {
     e.preventDefault();
     e.target.className += " was-validated";
-    /*Here must be the correct endpoint */
-   axios.post('http://10.4.28.184:5000/payment_cc', this.state)
+   axios.post('https://kieroapi.net/cc_payment', this.state)
   .then((response) => {
     console.log(response);
   }, (error) => {
@@ -54,11 +53,19 @@ class FormaPago extends React.Component{
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
+  // validar = e => {
+  //   if ([e.target.name] === 'formulario'){
+
+  //   }
+  // }
    
     render(){
       
       const {card_number,ccv,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,payer_addr1,payer_city,payer_department,cuotas,expiration_dateEmail}=this.state;
         return(
+
+          
             <div className='container-fluid'>
                 <div className="row-fluid">
                     <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
@@ -87,6 +94,7 @@ class FormaPago extends React.Component{
                                     
                                                             
                                                           <form
+                                                                  // name='formulario'
                                                                   className="was-validate"
                                                                   onSubmit={this.submitHandler}
                                                       

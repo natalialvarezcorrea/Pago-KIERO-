@@ -9,8 +9,6 @@ class Modalbutton extends React.Component{
     open:false
   };
 
-  
-
   onOpenModal = () => {
     this.setState({open:true});
   };
