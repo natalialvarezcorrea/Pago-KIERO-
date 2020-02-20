@@ -263,7 +263,7 @@ class FormaPago extends React.Component{
                                                                       </div>
 
                                                                       <div className="input-group mt-2">
-                                                                          <input className="form-control" type="text" name="payer_email" vaue={payer_email} placeholder="Email*" required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="text" name="payer_email" value={payer_email} placeholder="Email*" required onChange={this.changeHandler}/>
                                                                           <p style={{color:'red',fontSize:'14px'}}> {this.state.payer_emailError}</p>
                                                                           <div className="input-group-append">                                              
                                                                      
@@ -313,7 +313,7 @@ class FormaPago extends React.Component{
 
                                                                       </form> 
                                                                 
-                                                                     <div class={this.state.boton}> <button type="submit" className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}  >comprar </button></div>
+                                                                     <div className={this.state.boton}> <button type="submit" className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}  >comprar </button></div>
   
                                                                       <div>
                                                                                       <Modal open={open} onClose={this.onCloseModal} center>

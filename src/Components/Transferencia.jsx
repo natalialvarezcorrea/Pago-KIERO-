@@ -14,8 +14,24 @@ class Transferencia extends React.Component{
         person_type:'',
         document_type:'',
         document_number:'',
-        bank_id:''
+        bank_id:'',
+        boton:'false',
+        document_numberError:''
     }
+}
+
+valid(){
+
+  if ( !this.state.document_number.includes("@") )
+  {
+    this.setState(
+      {document_numberError:'invalid'}
+      )
+  }
+  else{
+    return true 
+  }
+
 }
 
 
@@ -39,6 +55,21 @@ submitHandler = e => {
       }, (error) => {
         console.log(error);
       });
+
+      this.setState(
+        {payer_emailError:""}
+        )
+    
+      
+    
+      if(this.valid()){
+       
+        this.setState({
+          boton:'active'
+        })  
+        
+      }
+    
 
     };
 
@@ -102,10 +133,12 @@ changeHandler = e => {
 
                                 <div className="form-group col-12">
                                 <input className="form-control col-12" type="text" name="document_number" minLength='10' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
+                                <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>
                                 </div>
                                 <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
           
                 
+                                <div className={this.state.boton}> <button type="submit" className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}  >comprar </button></div>
 
                 </form>
               
