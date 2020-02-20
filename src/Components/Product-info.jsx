@@ -1,6 +1,5 @@
 import React from "react";
 import '../assets/css/Products-info.css'
-import Modalbutton from '../Components/Modal';
 
 class ProductInfo extends React.Component{
 
@@ -12,7 +11,7 @@ class ProductInfo extends React.Component{
             <div className="col-sm-10 col-lg-12 cuadro ">
            
             </div>
-            <Modalbutton/>
+            
           
         </div>
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion'
-import {Card } from 'react-bootstrap';
+import {Card, Modal } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import axios from 'axios'
+import Modalbutton from '../Components/Modal';
 
 
 class Transferencia extends React.Component{
@@ -22,7 +23,7 @@ class Transferencia extends React.Component{
 
 valid(){
 
-  if ( !this.state.document_number.includes("@") )
+  if ( !this.state.document_number )
   {
     this.setState(
       {document_numberError:'invalid'}
@@ -57,7 +58,7 @@ submitHandler = e => {
       });
 
       this.setState(
-        {payer_emailError:""}
+        {document_numberError:""}
         )
     
       
@@ -132,13 +133,13 @@ changeHandler = e => {
                                 </div>
 
                                 <div className="form-group col-12">
-                                <input className="form-control col-12" type="text" name="document_number" minLength='10' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
+                                <input className="form-control col-12" type="text" name="document_number" minLength='5' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
                                 <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>
                                 </div>
                                 <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
           
                 
-                                <div className={this.state.boton}> <button type="submit" className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}  >comprar </button></div>
+                                <div className={this.state.boton}> <Modalbutton/></div>
 
                 </form>
               
