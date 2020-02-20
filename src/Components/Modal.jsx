@@ -24,7 +24,6 @@ render(){
 
     return(
         <div>
-            <button type="submit" onClick={this.onOpenModal} className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
             <Modal open={open} onClose={this.onCloseModal} center>
        
 

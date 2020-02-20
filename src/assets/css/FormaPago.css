@@ -141,3 +141,6 @@ background-color: white;}
 
 .cont{
 height: 500px;}
+
+.false{display:none}
+.active{display: block;}
