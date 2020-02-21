@@ -17,7 +17,13 @@ class Transferencia extends React.Component{
         document_number:'',
         bank_id:'',
         boton:'false',
-        document_numberError:''
+        document_numberError:'',
+        names:'',
+        email:'',
+        phone:'',
+        product_id:'',
+        user_id:''
+
     }
 }
 
@@ -49,13 +55,22 @@ valid(){
 submitHandler = e => {
         e.preventDefault();
      
-       /*Here must be the correct endpoint */
-      axios.post('http://10.4.28.184:5000/payment_cc', this.state)
-      .then((response) => {
-        console.log(response);
-      }, (error) => {
-        console.log(error);
-      });
+      axios.post('https://kieroapi.net/pse_payment', {
+          names:"maria",
+          email:"maria@gmail.com",
+          phone:'30255684',
+          product_id:'2374824',
+          user_id:"1093",
+          person_type: "N",
+          document_type:"CC",
+          document_number:this.state.document_number,
+          bank_id:"1040"
+      })
+      .then(res => {
+        console.log(res.data)
+      }).catch(e => {
+        console.log(e)
+      })
 
       this.setState(
         {document_numberError:""}
