@@ -61,11 +61,12 @@
 
 .input-group{width:200px}
 
-
+.padding-0{ padding-right:0; padding-left:0; } 
 
 .cred{height: 850px;
 float: left;
-text-align: center;}
+text-align: center;
+}
 
 .efecty{
         float: left;}

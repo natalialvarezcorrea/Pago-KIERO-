@@ -132,6 +132,10 @@ changeHandler = e => {
                                   </select>
                                 </div>
 
+
+                                
+        
+
                                 <div className="form-group col-12">
                                 <input className="form-control col-12" type="text" name="document_number" minLength='5' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
                                 <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>

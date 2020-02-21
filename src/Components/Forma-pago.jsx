@@ -10,7 +10,7 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Modalbutton from '../Components/Modal';
 
-
+import Factura from '../Components/Factura';
 
 class FormaPago extends React.Component{
 
@@ -133,14 +133,14 @@ class FormaPago extends React.Component{
                                             </Accordion.Toggle>
                                                 
                                                 <Accordion.Collapse eventKey="0" className='collap'>
-                                                  <div className='cont col-12'>
+                                                  <div className='cont '>
                                           <div className='cred col-md-12 col-sm-12 col-lg-8'>
                                              <Card.Body   >
                                              
                                                 <p>Ingresa una nueva tarjeta</p> 
                                               
-                                                        <div className='tarjeta col-12'>
-                                                          <div className='col-12 contenido'>
+                                                        <div className='tarjeta '>
+                                                          <div className=' contenido'>
                                     
                                                             
                                                           <form
@@ -338,9 +338,12 @@ class FormaPago extends React.Component{
                               </div>
                           <ProductInfo/>
                       </div>
+                      <Factura/>
                 </div>
      
             </div>
+
+        
 
         )
     }
