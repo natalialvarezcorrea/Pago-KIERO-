@@ -1,6 +1,6 @@
 import React from 'react';
 import Accordion from 'react-bootstrap/Accordion'
-import {Card, Modal } from 'react-bootstrap';
+import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import axios from 'axios'
 import Modalbutton from '../Components/Modal';
@@ -50,7 +50,7 @@ submitHandler = e => {
         e.preventDefault();
      
        /*Here must be the correct endpoint */
-      axios.post('https://kieroapi.net/pse_payment', this.state)
+      axios.post('http://10.4.28.184:5000/payment_cc', this.state)
       .then((response) => {
         console.log(response);
       }, (error) => {
@@ -139,10 +139,10 @@ changeHandler = e => {
                                 <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
           
                 
-                                <div className={this.state.boton}> <Modalbutton/></div>
+                               
 
                 </form>
-              
+                <div className={this.state.boton}> <Modalbutton/></div>
 
             </Card.Body>
             </Accordion.Collapse>

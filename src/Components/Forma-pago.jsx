@@ -70,23 +70,12 @@ class FormaPago extends React.Component{
 
   }
  
-  componentDidMount(){
-     axios.get(`https://kieroapi.net/get_session_id/`)
-     .then(res => {
-        this.setState({item:res.data});
-        console.log(res.data)
-     })
-     .catch(err => {
-         console.log(err)
-     })
-     }
-
  
 
  submitHandler = e => {
     e.preventDefault();
     e.target.className += " was-validated";
-   axios.post('http://10.4.28.184:5000/payment_cc', this.state)
+   axios.post('https://kieroapi.net/cc_payment', this.state)
   .then((response) => {
     console.log(response);
   }, (error) => {

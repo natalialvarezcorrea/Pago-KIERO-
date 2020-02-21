@@ -29,7 +29,7 @@ class Modalbutton extends React.Component{
     e.preventDefault();
  
    /*Here must be the correct endpoint */
-  axios.post('https://10.4.28.184:5000', this.state)
+  axios.post('http://10.4.28.184:5000/payment_cc', this.state)
   .then((response) => {
     console.log(response);
   }, (error) => {
@@ -59,7 +59,7 @@ render(){
     return(
         <div>
 
-<button type="submit" className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}> comprar </button>
+<a  className='btn btn-outline-danger btn-block mt-3'  onClick={this.onOpenModal}> Comprar </a>
             <Modal open={open} onClose={this.onCloseModal} center>
        
 
