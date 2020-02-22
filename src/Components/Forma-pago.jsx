@@ -27,7 +27,7 @@ class FormaPago extends React.Component{
         item: {},
         card_number : "",
         ccv : '',
-        expiration_dateEmail : '',
+        expiration_date : '',
         card_holder : '',
         card_type: '',
         payer_fullname: '',
@@ -35,6 +35,8 @@ class FormaPago extends React.Component{
         payer_phone : '',
         payer_document_number : '',
         payer_document_type : '',
+        cuotas:'',
+        product_id: '',
         payer_addr1 : '',
         payer_addr2 : '',
         payer_city : '',
@@ -42,7 +44,6 @@ class FormaPago extends React.Component{
         user_id : '',
         address_id : '',
         device_session_id : localStorage.getItem("md5"),  //Obtenemos lo que trae md5 desde localstorage
-        cuotas:'',
         payer_emailError:'',
         boton:'false',
 
@@ -75,9 +76,30 @@ class FormaPago extends React.Component{
  submitHandler = e => {
     e.preventDefault();
     e.target.className += " was-validated";
-   axios.post('https://kieroapi.net/cc_payment', this.state)
+    axios.post('https://kieroapi.net/cc_payment', {
+      card_number:this.state.card_number,
+      ccv: "4323",
+      expiration_date: "2021/12",
+      card_holder: "santiago valle",
+      card_type:"MASTERCARD",
+      payer_fullname:"Santiago Valle",
+      payer_email:"iefaz.santiagovalle@gmail.com",
+      payer_phone:"3017249486",
+      payer_document_number:"1152466011",
+      payer_document_type:"CC",
+      cuotas:"2",
+      product_id:"2301220",
+      payer_addr1:"cra 82a #36-32",
+      payer_addr2:"calle 36# 81-22",
+      payer_city:"Medellin",
+      payer_department:"Antioquia",
+      user_id:"1093",
+      address_id:"61",
+      device_session_id:"611326d0e6ab41299435886c285d658c"
+    })
       .then((response) => {
         console.log(response);
+        console.log(response.item)
       }, (error) => {
         console.log(error);
       });
@@ -101,15 +123,13 @@ class FormaPago extends React.Component{
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
-
-
-   
     render(){
 
-      const {card_number,ccv,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,payer_addr1,payer_city,payer_department,cuotas,expiration_dateEmail}=this.state;;
+      const {card_number,ccv,expiration_date,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,cuotas,payer_addr1,payer_city,payer_department}=this.state;;
       const years = []
+      const year = parseInt(new Date(Date.now()).getFullYear())
 
-      for (let i = 1970; i <= parseInt(new Date(Date.now()).getFullYear()); i++) {
+      for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
       }
       
@@ -168,7 +188,7 @@ class FormaPago extends React.Component{
                                                                       <div className=" mt-3">
 
                                                                       <div className="form-group col-lg-4 col-sm-12 month sele">
-                                                                      <select id="month" name="expiration_dateEmail" value={expiration_dateEmail} className="select_month cart_select italic light form-control"   required onChange={this.changeHandler}>
+                                                                      <select id="month" name="expiration_date" value={expiration_date} className="select_month cart_select italic light form-control"   required onChange={this.changeHandler}>
                                                                         
                                                                         <option value="01">Enero</option> 
                                                                         <option value="02">Febrero</option> 
@@ -185,7 +205,7 @@ class FormaPago extends React.Component{
                                                                         </select>
                                                                         </div>
                                                                       <div className="form-group an col-lg-4 col-sm-12 sele">
-                                                                      <select id="year" name="expiration_dateEmail" value={expiration_dateEmail} className="select_year cart_select italic light form-control ml-"  required onChange={this.changeHandler}>
+                                                                      <select id="year" name="expiration_date" value={expiration_date} className="select_year cart_select italic light form-control ml-"  required onChange={this.changeHandler}>
                                                                         {years.map(year => <option>{year}</option>)}
                                                                       </select> 
                                                                       </div>
