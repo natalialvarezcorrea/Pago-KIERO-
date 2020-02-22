@@ -4,6 +4,7 @@ import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import axios from 'axios'
 import Modalbutton from '../Components/Modal';
+import '../assets/css/Transferencia.css';
 
 
 class Transferencia extends React.Component{
@@ -12,18 +13,17 @@ class Transferencia extends React.Component{
     super()
     this.state = {
         items: {},
-        person_type:'',
-        document_type:'',
-        document_number:'',
-        bank_id:'',
-        boton:'false',
-        document_numberError:'',
         names:'',
         email:'',
         phone:'',
         product_id:'',
-        user_id:''
-
+        user_id:'',
+        person_type:'',
+        document_type:'',
+        document_number:'',
+        bank_pseCode:'',
+        boton:'false',
+        document_numberError:''
     }
 }
 
@@ -45,8 +45,12 @@ valid(){
   componentDidMount(){
   axios.get(`https://kieroapi.net/pse_banks`) /*Here must be the correct endpoint */
   .then(res => {
-      this.setState({items:res.data});
-  })
+    console.log(res.data)
+    this.setState({items:res.data});
+  }
+    
+      // console.log(items)
+  )
   .catch(err => {
       console.log(err)
   })
@@ -54,17 +58,17 @@ valid(){
 
 submitHandler = e => {
         e.preventDefault();
-     
+  console.log(this.state.bank_pseCode)
       axios.post('https://kieroapi.net/pse_payment', {
-          names:"maria",
-          email:"maria@gmail.com",
-          phone:'30255684',
-          product_id:'2374824',
-          user_id:"1093",
-          person_type: "N",
-          document_type:"CC",
-          document_number:this.state.document_number,
-          bank_id:"1040"
+        names:this.state.names,
+        email:this.state.email,
+        phone:this.state.phone,
+        product_id:"2374824",
+        user_id:"1093",
+        person_type:this.state.person_type,
+        document_type:this.state.document_type,
+        document_number:this.state.document_number,
+        bank_id:this.state.bank_pseCode
       })
       .then(res => {
         console.log(res.data)
@@ -94,7 +98,7 @@ changeHandler = e => {
 };
  
     render(){
-      const{person_type,document_type,document_number,bank_id}=this.state;
+      const{person_type,document_type,document_number,bank_pseCode,name,email,phone}=this.state;
 
         return(
 
@@ -105,7 +109,7 @@ changeHandler = e => {
                Transferencia desde PSE.
             </Accordion.Toggle>
             
-            <Accordion.Collapse eventKey="2">
+            <Accordion.Collapse eventKey="2" className='tam'>
             <Card.Body>
             
 <form
@@ -113,12 +117,33 @@ changeHandler = e => {
       onSubmit={this.submitHandler}
       >
             <div className="form-group col-12">
-                                  <label htmlFor="inputState " className='tes'>BANCOS</label>
-                                  <select id="inputState" className="form-control sel" name='bank_id' value={bank_id} onChange={this.changeHandler} required >
+                                    
+                                  <div className="input-group col-12">
+                                     <input className="form-control" name='name' type='text' value={name}  placeholder="Nombre Completo*" required onChange={this.changeHandler}/>
+                                     <div className="input-group-append">                                              
+                                  </div>
+                              </div>
+
+                              <div className="input-group col-12 mt-3">
+                                     <input className="form-control" name='email' type='email' value={email}  placeholder="Email*" required onChange={this.changeHandler}/>  
+                                     <div className="input-group-append">                                              
+                                  </div>
+                              </div>      
+
+                              <div className="input-group col-12 mt-3">
+                                     <input className="form-control" name='phone' type='number' value={phone}  placeholder="Telefono*" required onChange={this.changeHandler}/>
+                                     <div className="input-group-append">                                              
+                                  </div>
+                              </div>      
+
+
+
+                                  <label htmlFor="inputState " className='tes mt-3'>BANCOS</label>
+                                  <select  className="form-control sel"  name='bank_pseCode' value={bank_pseCode}  onChange={this.changeHandler} required >
                                   
                                   
                                 { /* change the params id for the description*/}
-                                  {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option key={bank.id} value={bank.id}>{bank.description}</option>  )}
+        {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option value={bank.pseCode}> {bank.description}</option>  )}
                                  
 
                                   </select>
@@ -127,22 +152,19 @@ changeHandler = e => {
                                <div className="form-group col-12">
                                   <label htmlFor="inputState " className='tes' >TIPO DE PERSONA</label>
                                   <select id="inputState" className="form-control sel" name='person_type' value={person_type} onChange={this.changeHandler} required>
-                                  <option defaultValue>Persona Natural</option>
-                                    <option>Persona juridica</option>
+                                  <option defaultValue >Tipo persona</option>
+                                    <option value={"J"} >Juridica</option>
+                                    <option value={"N"} >Natural</option>
                                   </select>
                                 </div>
                
                                  <div className="form-group col-12">
                                   <label htmlFor="inputState " className='tes' >DOCUMENTO DE IDENTIFICACION</label>
                                   <select id="inputState" className="form-control sel" name='document_type' value={document_type} onChange={this.changeHandler} required>
-                                  <option defaultValue>Cedula de ciudadania.</option>
-                                    <option>Numero de identificacion Tributario.</option>
-                                    <option>Tarjeta de Identidad</option>
-                                    <option>Pasaporte.</option>
-                                    <option>Identificador unico de cliente.</option>
-                                    <option>Movil</option>
-                                    <option>Registro civil</option>
-                                    <option>Documento de identificacion extranjero.</option>
+                                  <option >CC</option>
+
+                                    <option>CE</option>
+                                 
                                 
                                   </select>
                                 </div>
