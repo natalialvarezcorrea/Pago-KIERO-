@@ -76,11 +76,11 @@ class FormaPago extends React.Component{
     e.preventDefault();
     e.target.className += " was-validated";
    axios.post('https://kieroapi.net/cc_payment', this.state)
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
-  });
+      .then((response) => {
+        console.log(response);
+      }, (error) => {
+        console.log(error);
+      });
 
   this.setState(
     {payer_emailError:""}
@@ -199,6 +199,17 @@ class FormaPago extends React.Component{
                                                                           </div>
 
                                                                       </div>
+                                                                      <div className="form-group col-lg-12  col-sm-12 doc">
+                                                                          <label htmlFor="inputState"></label>
+                                                                          <select id="inputState" className="form-control" name="card_type" value={card_type} onChange={this.changeHandler}>
+                                                                            <option defaultValue>Tipo Tarjeta*</option>
+                                                                            <option>VISA</option>
+                                                                            <option>MASTERCARD</option>
+                                                                            <option>DINNERS</option>
+                                                                            <option>CRM</option>
+                                                                           </select>
+                                                                        </div>
+
                                                                       
                                                                                                                                              
                                                                         <div className="form-group col-lg-7 col-sm-12 doc">
@@ -285,17 +296,7 @@ class FormaPago extends React.Component{
                                                                       </div>
 
 
-                                                                      <div className="form-group col-lg-12  col-sm-12 doc">
-                                                                          <label htmlFor="inputState"></label>
-                                                                          <select id="inputState" className="form-control" name="card_type" value={card_type} onChange={this.changeHandler}>
-                                                                            <option defaultValue>Tipo Tarjeta*</option>
-                                                                            <option>VISA</option>
-                                                                            <option>MASTERCARD</option>
-                                                                            <option>DINNERS</option>
-                                                                            <option>CRM</option>
-                                                                           </select>
-                                                                        </div>
-
+                                                                     
                                                                         <button type="submit" className="btn btn-outline-danger btn-block mt-3">Enviar</button>
 
                                                                       </form> 
@@ -339,9 +340,9 @@ class FormaPago extends React.Component{
                           <ProductInfo/>
                           <Factura/>
                       </div>
-                     
+                  
                 </div>
-     
+             
             </div>
 
         

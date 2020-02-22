@@ -45,9 +45,20 @@ class Factura extends React.Component {
         
         }
 
+      
+         
+          onOpenModal = () => {
+            this.setState({ open: true });
+          };
+         
+          onCloseModal = () => {
+            this.setState({ open: false });
+          };
+        
     render() {
+        const { data } = this.state;
         const { open } = this.state;
-        const {data}=this.state;
+        
         console.log(this.state.data)
         return(
             <div  >
