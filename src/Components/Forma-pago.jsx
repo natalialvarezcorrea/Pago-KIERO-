@@ -337,8 +337,9 @@ class FormaPago extends React.Component{
                           
                               </div>
                           <ProductInfo/>
+                          <Factura/>
                       </div>
-                      <Factura/>
+                     
                 </div>
      
             </div>
