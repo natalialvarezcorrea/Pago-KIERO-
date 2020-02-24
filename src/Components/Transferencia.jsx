@@ -45,7 +45,7 @@ valid(){
   componentDidMount(){
   axios.get(`https://kieroapi.net/pse_banks`) /*Here must be the correct endpoint */
   .then(res => {
-    console.log(res.data)
+
     this.setState({items:res.data});
   }
     
@@ -58,6 +58,7 @@ valid(){
 
 submitHandler = e => {
         e.preventDefault();
+        e.target.className += " was-validated";
   console.log(this.state.bank_pseCode)
       axios.post('https://kieroapi.net/pse_payment', {
         names:this.state.names,
@@ -71,7 +72,7 @@ submitHandler = e => {
         bank_id:this.state.bank_pseCode
       })
       .then(res => {
-        console.log(res.data)
+
       }).catch(e => {
         console.log(e)
       })
@@ -114,7 +115,8 @@ changeHandler = e => {
             
 <form
       className="needs-validation"
-      onSubmit={this.submitHandler}
+      
+      className="was-validate"      onSubmit={this.submitHandler}
       >
             <div className="form-group col-12">
                                     

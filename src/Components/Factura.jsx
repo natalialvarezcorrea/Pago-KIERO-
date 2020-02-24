@@ -59,7 +59,6 @@ class Factura extends React.Component {
         const { data } = this.state;
         const { open } = this.state;
         
-        console.log(this.state.data)
         return(
             <div  >
                 

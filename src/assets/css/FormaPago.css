@@ -132,12 +132,11 @@ float: left;
 .f{background-color: cadetblue;
 margin-left: -8px;}
 
-.n{
-     
-   
-float: right;}
+.n{margin-top:130px;
+float: right;
+}
 
-.collap{height: 1050px !important;
+.collap{height: 1150px !important;
 background-color: white;}
 
 .cont{
@@ -145,3 +144,6 @@ height: 500px;}
 
 .false{display:none}
 .active{display: block;}
+
+
+.an{float: left;}
