@@ -4,5 +4,19 @@
        }
 
 .cuadro{background-color: white;
-            height:200px;
          margin-top: 14%;}
+
+.imagenes{width:150px !important;
+  float: left;
+}
+
+.tit{font-size:0.8em;
+ margin-top: 20px ;}
+
+ .tex{float: right;
+
+}
+
+.m{background-color: blue;
+}
+

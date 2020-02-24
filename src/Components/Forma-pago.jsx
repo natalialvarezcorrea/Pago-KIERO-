@@ -10,7 +10,7 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Modalbutton from '../Components/Modal';
 
-import Factura from '../Components/Factura';
+
 
 class FormaPago extends React.Component{
 
@@ -386,7 +386,7 @@ class FormaPago extends React.Component{
                           
                               </div>
                           <ProductInfo/>
-                          <Factura/>
+         
                       </div>
                   
                 </div>

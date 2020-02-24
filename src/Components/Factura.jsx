@@ -60,9 +60,9 @@ class Factura extends React.Component {
         const { open } = this.state;
         
         return(
-            <div  >
+            <div className='verfactura mt-2' >
                 
-                <button onClick={this.onOpenModal}>Open modal</button>
+                <a onClick={this.onOpenModal} >Ver tu Factura</a>
                 <Modal open={open} onClose={this.onCloseModal} center>
                     <div className='col-12'>
                     <h1 style={{textAlign:'center'}}>{data.state}</h1>
@@ -77,7 +77,7 @@ class Factura extends React.Component {
               
                 </div>
 
-                <div className='derechaa col-6' style={{textAlign:'center'}}>
+                <div className='derechaa col-6' >
                 <p>Precio : {data.value_transaction}</p>
                 <p>Producto : {data.title_product}</p>
                 <p>Cantidad : {data.cantidad}</p> 

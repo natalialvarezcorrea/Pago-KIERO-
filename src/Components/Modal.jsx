@@ -2,6 +2,8 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import '../assets/css/modal.css'
 import axios from 'axios'
+import Factura from './Factura';
+
 
 
 class Modalbutton extends React.Component{
@@ -19,7 +21,8 @@ class Modalbutton extends React.Component{
       telefono:'',
       ciudad:'',
       barrio:'',
-      direccion:''
+      direccion:'',
+      botone:'false',
 
 
     }
@@ -35,6 +38,9 @@ class Modalbutton extends React.Component{
   }, (error) => {
     console.log(error);
   });
+  this.setState({
+    botone:'active'
+  })  
 
 };
 
@@ -59,7 +65,7 @@ render(){
     return(
         <div>
 
-<a  className='btn btn-outline-danger btn-block mt-3' style={{color:'red'}}  onClick={this.onOpenModal}> Comprar </a>
+<a  className='btn btn-outline-danger btn-block mt-3'  style={{color:'red'}}  onClick={this.onOpenModal}> Comprar </a>
             <Modal open={open} onClose={this.onCloseModal} center>
        
 
@@ -73,6 +79,7 @@ render(){
            <input className="form-control mt-3" name='direccion' value={direccion} type="text" placeholder="direccion*" required onChange={this.changeHandler}/>
            
            <button type="submit" className="btn btn-outline-danger btn-block mt-3">Comprar</button>
+            <div className={this.state.botone}><Factura/></div>
 
 
 </form>

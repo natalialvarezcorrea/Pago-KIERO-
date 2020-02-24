@@ -49,7 +49,7 @@ valid(){
     this.setState({items:res.data});
   }
     
-      // console.log(items)
+    
   )
   .catch(err => {
       console.log(err)
@@ -59,7 +59,7 @@ valid(){
 submitHandler = e => {
         e.preventDefault();
         e.target.className += " was-validated";
-  console.log(this.state.bank_pseCode)
+
       axios.post('https://kieroapi.net/pse_payment', {
         names:this.state.names,
         email:this.state.email,
