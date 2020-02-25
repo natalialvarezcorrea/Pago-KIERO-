@@ -1,14 +1,19 @@
-import React,{Fragment}from 'react';
+import React from 'react';
 import Pago from './pages/Pago';
 import './App.css';
+import { BrowserRouter as Router, Switch , Route } from 'react-router-dom';
 
-function App() {
-  return (
-  <Fragment>
-    <Pago/>
-  </Fragment>
-    
-  );
+class App extends React.Component {
+  render(){
+    return (
+      <Router>
+        <Switch>
+           <Route path="/" component={Pago}/>
+        </Switch>
+      </Router>
+      );
+  }
+ 
 }
 
 export default App;
