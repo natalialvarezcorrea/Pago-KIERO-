@@ -36,17 +36,21 @@ class ProductInfo extends React.Component{
                    <div className='tex col-lg-6 col-sm-12 mt-3'> 
                        <p className='tit'>Titulo: {Object.keys(items).length > 0 && items.Resultados.titulo}</p>
                        <p className='tit '>Precio: {Object.keys(items).length > 0 && items.Resultados.precio}</p>
+                       
                    </div>
                    </div>
 
 
-                    <div className='col-lg-12 '>
-                    <p className='tit' >Descripcion: <br/>{Object.keys(items).length > 0 && items.Resultados.descripcion}</p>
+                   <div className='col-12 j '>
+                   <p className='tit' >Descripcion: <br/>{Object.keys(items).length > 0 && items.Resultados.descripcion}</p>
                     </div>
+                   
 
                     
 
                 </div>
+
+                
             </div>
         )
     }
