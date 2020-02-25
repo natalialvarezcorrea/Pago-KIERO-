@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import axios from 'axios'
-import Modalbutton from '../Components/Modal';
+import Modalbutton from '../Components/Modal/Modal';
 import '../assets/css/Transferencia.css';
 
 
@@ -106,18 +106,14 @@ changeHandler = e => {
           <div>
             <Card>
                                                   
-            <Accordion.Toggle as={Card.Header} variant="link" eventKey="2" className='tamano '>
+            <Accordion.Toggle as={Card.Header} variant="link" eventKey="2" className='tamano'>
                Transferencia desde PSE.
             </Accordion.Toggle>
             
             <Accordion.Collapse eventKey="2" className='tam'>
             <Card.Body>
             
-<form
-      className="needs-validation"
-      
-      className="was-validate"      onSubmit={this.submitHandler}
-      >
+<form className="was-validate needs-validation" onSubmit={this.submitHandler}>
             <div className="form-group col-12">
                                     
                                   <div className="input-group col-12">
@@ -140,8 +136,8 @@ changeHandler = e => {
 
 
 
-                                  <label htmlFor="inputState " className='tes mt-3'>BANCOS</label>
-                                  <select  className="form-control sel"  name='bank_pseCode' value={bank_pseCode}  onChange={this.changeHandler} required >
+                                  <label htmlFor="bank" className='tes mt-3'>BANCOS</label>
+                                  <select  className="form-control sel" id="bank" name='bank_pseCode' value={bank_pseCode}  onChange={this.changeHandler} required >
                                   
                                   
                                 { /* change the params id for the description*/}
@@ -152,8 +148,8 @@ changeHandler = e => {
                                 </div>
 
                                <div className="form-group col-12">
-                                  <label htmlFor="inputState " className='tes' >TIPO DE PERSONA</label>
-                                  <select id="inputState" className="form-control sel" name='person_type' value={person_type} onChange={this.changeHandler} required>
+                                  <label htmlFor="kindperson " className='tes' >TIPO DE PERSONA</label>
+                                  <select id="kindperson" className="form-control sel" name='person_type' value={person_type} onChange={this.changeHandler} required>
                                   <option defaultValue >Tipo persona</option>
                                     <option value={"J"} >Juridica</option>
                                     <option value={"N"} >Natural</option>
@@ -161,8 +157,8 @@ changeHandler = e => {
                                 </div>
                
                                  <div className="form-group col-12">
-                                  <label htmlFor="inputState " className='tes' >DOCUMENTO DE IDENTIFICACION</label>
-                                  <select id="inputState" className="form-control sel" name='document_type' value={document_type} onChange={this.changeHandler} required>
+                                  <label htmlFor="identification" className='tes' >DOCUMENTO DE IDENTIFICACION</label>
+                                  <select id="identification" className="form-control sel" name='document_type' value={document_type} onChange={this.changeHandler} required>
                                   <option >CC</option>
 
                                     <option>CE</option>
