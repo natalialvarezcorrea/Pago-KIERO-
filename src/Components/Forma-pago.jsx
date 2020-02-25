@@ -14,7 +14,7 @@ import Modalbutton from '../Components/Modal/Modal';
 
 let uri = "";
 let destructured = [];
-let product = {};
+// let product = {};
 
 class FormaPago extends React.Component{
   constructor(){
@@ -41,7 +41,8 @@ class FormaPago extends React.Component{
         address_id:"",
         device_session_id:"",
         payer_emailError:'',
-        boton:'false'
+        boton:'false',
+        product: {}
       };
   }
 
@@ -130,7 +131,6 @@ class FormaPago extends React.Component{
       for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
       }
-      console.log(this.state)
 
       return(
 
@@ -218,34 +218,23 @@ class FormaPago extends React.Component{
                                                                           <label htmlFor="documenttype"></label>
                                                                           <select id="documenttype" className="form-control " name='payer_document_type' value={payer_document_type} onChange={this.changeHandler}>
                                                                             <option defaultValue>Tipo Documento*</option>
-                                                                            <option>CN</option>
                                                                             <option>CC</option>
+                                                                            <option>CE</option>
                                                                             <option>NIT</option>
+                                                                            <option>TI</option>
+                                                                            <option>PP</option>
+                                                                            <option>IDC</option>
+                                                                            <option>CEL</option>
+                                                                            <option>RC</option>
+                                                                            <option>DE</option>
                                                                            </select>
                                                                         </div>
 
                                                                         <div className="form-group col-lg-5 col-sm-12 cuotas ">
                                                                           <label htmlFor="dues"></label>
                                                                           <select id="dues" className="form-control sel" name='cuotas' value={cuotas} required  onChange={this.changeHandler}>
-                                                                            <option defaultValue>Cuotas*</option>
-                                                                            <option>1</option>
-                                                                            <option>2</option>
-                                                                            <option>3</option>
-                                                                            <option>4</option>
-                                                                            <option>5</option>
-                                                                            <option>6</option>
-                                                                            <option>7</option>
-                                                                            <option>8</option>
-                                                                            <option>9</option>
-                                                                            <option>10</option>
-                                                                            <option>11</option>
-                                                                            <option>12</option>
-                                                                            <option>13</option>
-                                                                            <option>14</option>
-                                                                            <option>15</option>
-                                                                            <option>16</option>
-                                                                            <option>17</option>
-                                                                            <option>18</option>
+                                                                            <option key="0" defaultValue>Cuotas*</option>
+                                                                            {[...Array(18).keys()].map((number,index) => (<option key={index+1}>{number+1}</option>))}
 
                                                                           </select>
                                                                         </div>
@@ -341,19 +330,19 @@ class FormaPago extends React.Component{
                              </div>
 
                              <div className='efectivo '>
-                                          <Efectivo product={ Object.keys(product).length > 0 && product }/>
+                                          <Efectivo/>
                               </div>
 
 
                               <div className='pse '>
-                                               <Transferencia product={ Object.keys(product).length > 0 && product  }/>
+                                               <Transferencia/>
                                 </div>
                                
                                </Accordion>
 
                           
                               </div>
-                          <ProductInfo productid={destructured[2]} product={ Object.keys(product).length > 0 && product}/>
+                          <ProductInfo productid={destructured[2]} product={ product }/>
          
                       </div>
                   

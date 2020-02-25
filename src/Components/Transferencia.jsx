@@ -141,7 +141,7 @@ changeHandler = e => {
                                   
                                   
                                 { /* change the params id for the description*/}
-        {Object.keys(this.state.items).length > 0 && this.state.items.banks.map(bank => <option value={bank.pseCode}> {bank.description}</option>  )}
+        {Object.keys(this.state.items).length > 0 && this.state.items.banks.map((bank,index) => <option key={index} value={bank.pseCode}> {bank.description}</option>  )}
                                  
 
                                   </select>
