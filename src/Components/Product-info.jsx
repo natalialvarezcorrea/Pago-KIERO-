@@ -7,11 +7,15 @@ class ProductInfo extends React.Component{
     constructor(){
         super()
         this.state = {
-            items: {}
+            items: {},
+            product_id:'',
+            user_id:''
         }
     }
 
     async componentWillMount(){
+           
+    
             let response = await axios.get(`https://kieroapi.net/product/detail/1340673`);
             this.setState({items:response.data});
        
@@ -20,7 +24,7 @@ class ProductInfo extends React.Component{
 
     render(){
         const { items }=this.state;
-        console.log(this.state.items)
+        //console.log(this.state.items)
         return(
             <div className=' derecha col-sm-12 col-lg-4'>
 

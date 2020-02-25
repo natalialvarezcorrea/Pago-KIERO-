@@ -65,7 +65,7 @@ render(){
     return(
         <div>
 
-<a  className='btn btn-outline-danger btn-block mt-3'  style={{color:'red'}}  onClick={this.onOpenModal}> Comprar </a>
+<a  href = "#" className='btn btn-outline-danger btn-block mt-3'  style={{color:'red'}}  onClick={this.onOpenModal}> Comprar </a>
             <Modal open={open} onClose={this.onCloseModal} center>
        
 

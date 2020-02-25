@@ -15,6 +15,7 @@
     "react-form-validator-core": "^0.6.5",
     "react-icons": "^3.9.0",
     "react-responsive-modal": "^4.0.1",
+    "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.1",
     "react-select": "^3.0.8",
     "simple-react-validator": "^1.4.4"
