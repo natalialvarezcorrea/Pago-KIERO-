@@ -1,10 +1,12 @@
 .derecha{
-         height: 300px;
          float: right;
+         background-color: white;
+         margin-top:3%;
+         border-radius: 5px;
        }
 
 .cuadro{background-color: white;
-         margin-top: 14%;}
+         }
 
 .imagenes{width:150px !important;
   float: left;
@@ -13,6 +15,9 @@
 .tit{font-size:0.8em;
  margin-top: 20px ;}
 
+ .precio{font-weight: 200;
+  font-size:0.9em;}
+
  .tex{float: right;
 
 }
@@ -20,5 +25,6 @@
 .m{background-color: blue;
 }
 
-.j{float: right;}
+.j{float: right;
+text-align: center;}
 
