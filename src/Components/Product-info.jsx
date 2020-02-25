@@ -11,6 +11,7 @@ class ProductInfo extends React.Component{
     }
 
     render(){
+        
         const items = this.props.product;
         return(
             <div className=' derecha col-sm-12 col-lg-4'>

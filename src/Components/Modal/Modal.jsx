@@ -26,7 +26,6 @@ class Modalbutton extends React.Component{
   submitHandler = e => {
     e.preventDefault();
  
-   /*Here must be the correct endpoint */
   axios.post('https://kieroapi.net/pse_payment', this.state)
   .then((response) => {
     console.log(response);
@@ -60,7 +59,7 @@ render(){
     return(
       <div>
 
-        <a  href = "#" className='btn btn-outline-danger btn-block mt-3'  style={{color:'#cf0a2c'}}  onClick={this.onOpenModal}> Comprar </a>
+        <a  href = "a" className='btn btn-outline-danger btn-block mt-3'  style={{color:'#cf0a2c'}}  onClick={this.onOpenModal}> Comprar </a>
         <Modal open={open} onClose={this.onCloseModal} center>
 
 

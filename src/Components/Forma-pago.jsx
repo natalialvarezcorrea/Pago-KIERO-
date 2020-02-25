@@ -9,12 +9,12 @@ import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
 import axios from 'axios';
 import Modalbutton from '../Components/Modal/Modal';
-
+import Direcciones from '../Components/Modal/Direcciones';
 
 
 let uri = "";
 let destructured = [];
-// let product = {};
+
 
 class FormaPago extends React.Component{
   constructor(){
@@ -49,7 +49,7 @@ class FormaPago extends React.Component{
   async componentWillMount(){
     uri = window.location.href;
     destructured = uri.substr(uri.indexOf("#")).split("/");
-
+    
     let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
     await this.setState({ ...this.state, product: response.data });
   }
@@ -131,11 +131,12 @@ class FormaPago extends React.Component{
       for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
       }
-
+      
       return(
 
           
             <div className='container-fluid'>
+              <Direcciones/>
                 <div className="row-fluid">
                     <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
                         <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -177,11 +178,7 @@ class FormaPago extends React.Component{
                                                                             
                                                                           </div>
                                                                       </div>
-                                                           
 
-                                                                     
-
-                                                                   
 
                                                                      <div className="input-group col-lg-6 col-sm-12 an mt-3">
                                                                        <input className="form-control" name='expiration_date' type='text' value={expiration_date}  placeholder="YYYY/MM" minLength='7' maxLength='7' required onChange={this.changeHandler}/>

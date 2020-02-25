@@ -53,7 +53,7 @@ class Factura extends React.Component {
         return(
             <div className='verfactura mt-2' >
                 
-                <a onClick={this.onOpenModal} >Ver tu Factura</a>
+                <a  href="a"onClick={this.onOpenModal} >Ver tu Factura</a>
                 <Modal open={open} onClose={this.onCloseModal} center>
                     <div className='col-12'>
                     <h1 style={{textAlign:'center'}}></h1>
