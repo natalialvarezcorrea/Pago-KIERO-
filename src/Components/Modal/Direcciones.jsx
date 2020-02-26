@@ -57,7 +57,7 @@ async componentWillMount(){
     // ESTE FRAGMENTO ES ÚNICAMENTE PARA PROBAR EL ENDPOINT "CREAR DIRECCIÓN"
     // POR FAVOR QUITAR DATOS QUEMADOS Y OBTENERLOS DEL DOM
     // EEL ENDPOINT RETORNA: {"message":"ok"} EN CASO DE QUE TODO ESTE BIEN
-    ////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////// 
     if(destructured.length==6){
         const data = {
                     user_id: user_id,
