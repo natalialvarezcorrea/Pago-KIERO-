@@ -4,7 +4,7 @@ import baloto from '../assets/img/baloto.png';
 import { Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion'
 import '../assets/css/FormaPago.css';
-import Modalbutton from '../Components/Modal';
+import Modalbutton from './Modal/Modal';
 import '../assets/css/Efectivo.css';
 
 

@@ -7,7 +7,6 @@ class Pago extends React.Component{
 
 
     render(){
-
         return(
             <div>
         

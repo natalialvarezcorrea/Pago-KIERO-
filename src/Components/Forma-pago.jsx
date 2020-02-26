@@ -8,19 +8,15 @@ import img from '../assets/img/card-credit.png'
 import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
 import axios from 'axios';
-import Modalbutton from '../Components/Modal';
+import Modalbutton from '../Components/Modal/Modal';
+import Direcciones from '../Components/Modal/Direcciones';
 
+
+let uri = "";
+let destructured = [];
 
 
 class FormaPago extends React.Component{
-
-    
-  state = {
-    
-    open:false
-  };
-
-
   constructor(){
     super()
     this.state = {
@@ -46,16 +42,17 @@ class FormaPago extends React.Component{
         device_session_id:"",
         payer_emailError:'',
         boton:'false',
-
+        product: {}
       };
   }
-  
-  onOpenModal = () => {
-    this.setState({open:true});
-  };
-  onCloseModal = () => {
-    this.setState({ open:false });
-  };
+
+  async componentWillMount(){
+    uri = window.location.href;
+    destructured = uri.substr(uri.indexOf("#")).split("/");
+    
+    let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
+    await this.setState({ ...this.state, product: response.data });
+  }
  
   valid(){
 
@@ -74,8 +71,9 @@ class FormaPago extends React.Component{
  
 
  submitHandler = e => {
+    
     e.preventDefault();
-    console.log(this.state.card_number)
+
     e.target.className += " was-validated";
     axios.post('https://kieroapi.net/cc_payment', {
       card_number:this.state.card_number,
@@ -89,18 +87,17 @@ class FormaPago extends React.Component{
       payer_document_number:this.state.payer_document_number,
       payer_document_type:this.state.payer_type,
       cuotas:this.state.cuotas,
-      product_id:"2301220",
+      product_id: destructured[2],
       payer_addr1:this.state.payer_addr1,
       payer_addr2:this.state.payer_addr2,
       payer_city:this.state.payer_city,
       payer_department:this.state.payer_department,
-      user_id:"1093",
+      user_id: destructured[4],
       address_id:"61",
       device_session_id:"611326d0e6ab41299435886c285d658c"
     })
       .then((response) => {
-        console.log(response);
-        console.log(response.item)
+
       }, (error) => {
         console.log(error);
       });
@@ -129,6 +126,7 @@ class FormaPago extends React.Component{
       const {card_number,ccv,expiration_date,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,cuotas,payer_addr1,payer_city,payer_department,card_holder,payer_addr2}=this.state;;
       const years = []
       const year = parseInt(new Date(Date.now()).getFullYear())
+      const { product } = this.state;
 
       for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
@@ -138,6 +136,7 @@ class FormaPago extends React.Component{
 
           
             <div className='container-fluid'>
+              <Direcciones/>
                 <div className="row-fluid">
                     <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
                         <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -164,13 +163,7 @@ class FormaPago extends React.Component{
                                                           <div className=' contenido'>
                                     
                                                             
-                                                          <form
-                                                                  className="needs-validation"
-                                                                  className="was-validate"
-                                                                  onSubmit={this.submitHandler}
-                                                      
-                                                                >
-
+                                                          <form className="needs-validation was-validate" onSubmit={this.submitHandler}>
 
                                                                       <div className="input-group mr-5">
                                                                        <input className="form-control" name='card_number' type='text' value={card_number}  placeholder="Numero tarjeta*" minLength='16' maxLength='40' required onChange={this.changeHandler}/>
@@ -180,16 +173,12 @@ class FormaPago extends React.Component{
                                                                       </div>
 
                                                                       <div className="input-group mr-5 mt-3">
-                                                                       <input className="form-control" name='card_holder' type='text' value={card_holder}  placeholder="Nombre tarjetaHabiente*"  required onChange={this.changeHandler}/>
+                                                                       <input className="form-control" name='card_holder' type='text' value={card_holder}  placeholder="Nombre y apellido impreso en la tarjeta*"  required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                             
                                                                           </div>
                                                                       </div>
-                                                           
 
-                                                                     
-
-                                                                   
 
                                                                      <div className="input-group col-lg-6 col-sm-12 an mt-3">
                                                                        <input className="form-control" name='expiration_date' type='text' value={expiration_date}  placeholder="YYYY/MM" minLength='7' maxLength='7' required onChange={this.changeHandler}/>
@@ -199,46 +188,19 @@ class FormaPago extends React.Component{
                                                                           </div>
 
                                                                           <div className="input-group col-lg-6 col-sm-12 cv mt-3 ">
-                                                                          <input className="form-control" type="text"  name='ccv' value={ccv} placeholder="CVV*" minLength='4' maxLength='4' required onChange={this.changeHandler}/>
+                                                                          <input className="form-control" type="text"  name='ccv' value={ccv} placeholder="CVV*" minLength='3' maxLength='4' required onChange={this.changeHandler}/>
                                                                           <div className="input-group-append">                                              
                                                                     
                                                                           </div>
 
                                                                           </div>
 
-                                                                          
-                                                                     
- {/* 
-                                                                      <div className="form-group col-lg-4 col-sm-12 month sele">
-                                                                      <select id="month" name="expiration_date" value={expiration_date} className="select_month cart_select italic light form-control"   required onChange={this.changeHandler}>
-                                                                        
-                                                                        <option value="01">Enero</option> 
-                                                                        <option value="02">Febrero</option> 
-                                                                        <option value="03">Marzo</option> 
-                                                                        <option value="04">Abril</option> 
-                                                                        <option value="05">Mayo</option> 
-                                                                        <option value="06">Junio</option> 
-                                                                        <option value="07">Julio</option> 
-                                                                        <option value="08">Agosto</option> 
-                                                                        <option value="09">Septiembre</option> 
-                                                                        <option value="10">Octubre</option> 
-                                                                        <option value="11">Noviembre</option> 
-                                                                        <option value="12">Diciembre</option> 
-                                                                        </select>
-                                                                        </div>
-                                                                      <div className="form-group an col-lg-4 col-sm-12 sele">
-                                                                      <select id="year" name="expiration_date" value={expiration_date} className="select_year cart_select italic light form-control ml-"  required onChange={this.changeHandler}>
-                                                                        {years.map(year => <option>{year}</option>)}
-                                                                      </select> 
-                                                                      </div> */}
-                                                                          
-                                                                      
-                                                                      
+
 
                                                                     
                                                                       <div className="form-group col-lg-12  col-sm-12 doc">
-                                                                          <label htmlFor="inputState"></label>
-                                                                          <select id="inputState" className="form-control" name="card_type" value={card_type} onChange={this.changeHandler}>
+                                                                          <label htmlFor="typecard"></label>
+                                                                          <select id="typecard" className="form-control" name="card_type" value={card_type} onChange={this.changeHandler}>
                                                                             <option defaultValue>Tipo Tarjeta*</option>
                                                                             <option>VISA</option>
                                                                             <option>MASTERCARD</option>
@@ -250,37 +212,26 @@ class FormaPago extends React.Component{
                                                                       
                                                                                                                                              
                                                                         <div className="form-group col-lg-7 col-sm-12 doc">
-                                                                          <label htmlFor="inputState"></label>
-                                                                          <select id="inputState" className="form-control " name='payer_document_type' value={payer_document_type} onChange={this.changeHandler}>
+                                                                          <label htmlFor="documenttype"></label>
+                                                                          <select id="documenttype" className="form-control " name='payer_document_type' value={payer_document_type} onChange={this.changeHandler}>
                                                                             <option defaultValue>Tipo Documento*</option>
-                                                                            <option>CN</option>
                                                                             <option>CC</option>
+                                                                            <option>CE</option>
                                                                             <option>NIT</option>
+                                                                            <option>TI</option>
+                                                                            <option>PP</option>
+                                                                            <option>IDC</option>
+                                                                            <option>CEL</option>
+                                                                            <option>RC</option>
+                                                                            <option>DE</option>
                                                                            </select>
                                                                         </div>
 
                                                                         <div className="form-group col-lg-5 col-sm-12 cuotas ">
-                                                                          <label htmlFor="inputState"></label>
-                                                                          <select id="inputState" className="form-control sel" name='cuotas' value={cuotas} required  onChange={this.changeHandler}>
-                                                                            <option defaultValue>Cuotas*</option>
-                                                                            <option>1</option>
-                                                                            <option>2</option>
-                                                                            <option>3</option>
-                                                                            <option>4</option>
-                                                                            <option>5</option>
-                                                                            <option>6</option>
-                                                                            <option>7</option>
-                                                                            <option>8</option>
-                                                                            <option>9</option>
-                                                                            <option>10</option>
-                                                                            <option>11</option>
-                                                                            <option>12</option>
-                                                                            <option>13</option>
-                                                                            <option>14</option>
-                                                                            <option>15</option>
-                                                                            <option>16</option>
-                                                                            <option>17</option>
-                                                                            <option>18</option>
+                                                                          <label htmlFor="dues"></label>
+                                                                          <select id="dues" className="form-control sel" name='cuotas' value={cuotas} required  onChange={this.changeHandler}>
+                                                                            <option key="0" defaultValue>Cuotas*</option>
+                                                                            {[...Array(18).keys()].map((number,index) => (<option key={index+1}>{number+1}</option>))}
 
                                                                           </select>
                                                                         </div>
@@ -349,7 +300,10 @@ class FormaPago extends React.Component{
 
                                                                       </form> 
                                                                 
-                                                                     <div className={this.state.boton}> <Modalbutton/></div>
+                                                                     <div className={this.state.boton}> 
+                                                                     <Modalbutton/>
+                                                                     
+                                                                     </div>
   
                                                                     
                
@@ -385,7 +339,7 @@ class FormaPago extends React.Component{
 
                           
                               </div>
-                          <ProductInfo/>
+                          <ProductInfo productid={destructured[2]} product={ product }/>
          
                       </div>
                   

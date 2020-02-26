@@ -7,14 +7,14 @@ import '../assets/css/Factura.css'
 class Factura extends React.Component {
     state = {
         open: false,
-        data: []
+        items: {}
            
         }
 
     // constructor(){
     //     super()
     //     this.state={
-    //         data:{}
+    //         items:{}
     //     }
     // }
   
@@ -28,22 +28,12 @@ class Factura extends React.Component {
         this.setState({ open: false });
     };
 
-    componentDidMount(){
-        axios.get(`http://10.4.28.184:5000/payment_cc`) /*Here must be the correct endpoint */
-        .then(res => {
-           const data =res.data;
-
-            this.setState({data})
+    async componentWillMount(){
+        let response = await axios.get(`https://kieroapi.net/product/detail/1340673`);
+        this.setState({items:response.items});
+        console.log(response.items)
+    }
       
-            
-        }
-        )
-
-        .catch(err => {
-            console.log(err)
-        })
-        
-        }
 
       
          
@@ -56,34 +46,35 @@ class Factura extends React.Component {
           };
         
     render() {
-        const { data } = this.state;
+        const { items } = this.state;
+        
         const { open } = this.state;
         
         return(
             <div className='verfactura mt-2' >
                 
-                <a onClick={this.onOpenModal} >Ver tu Factura</a>
+                <a  href="a"onClick={this.onOpenModal} >Ver tu Factura</a>
                 <Modal open={open} onClose={this.onCloseModal} center>
                     <div className='col-12'>
-                    <h1 style={{textAlign:'center'}}>{data.state}</h1>
+                    <h1 style={{textAlign:'center'}}></h1>
                   <div className='izquierdaa col-6'>
                      <div className="imagen">
                          imagen
                      </div>
 
                      <div>
-                            <p style={{textAlign:'center'}}>{data.user_name}</p>
+                            <p style={{textAlign:'center'}}></p>
                      </div>
               
                 </div>
 
                 <div className='derechaa col-6' >
-                <p>Precio : {data.value_transaction}</p>
-                <p>Producto : {data.title_product}</p>
-                <p>Cantidad : {data.cantidad}</p> 
-                <p>Estado Transaccion : {data.responseMessage}</p>
-                <p>Fecha : {data.transactionDate}</p>
-                <p> Direccion Envio: {data.user_address}</p>
+                <p>Precio :  {Object.keys(items).length > 0 && items.Resultados.precio}</p>
+                <p>Producto :{Object.keys(items).length > 0 && items.Resultados.titulo}</p>
+                <p>Cantidad : {items.cantidad}</p> 
+                <p>Estado Transaccion : {items.responseMessage}</p>
+                <p>Fecha : {items.transactionDate}</p>
+                <p> Direccion Envio: {items.user_address}</p>
      
 
                 </div>
