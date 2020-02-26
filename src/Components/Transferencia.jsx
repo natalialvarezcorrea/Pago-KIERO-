@@ -3,7 +3,7 @@ import Accordion from 'react-bootstrap/Accordion'
 import {Card } from 'react-bootstrap';
 import '../assets/css/FormaPago.css';
 import axios from 'axios'
-import Modalbutton from '../Components/Modal/Modal';
+import Pse from '../Components/Modal/Pse';
 import '../assets/css/Transferencia.css';
 
 
@@ -23,7 +23,8 @@ class Transferencia extends React.Component{
         document_number:'',
         bank_pseCode:'',
         boton:'false',
-        document_numberError:''
+        document_numberError:'',
+        Enviar:'',
     }
 }
 
@@ -88,6 +89,9 @@ submitHandler = e => {
         this.setState({
           boton:'active'
         })  
+        this.setState(
+          {Enviar:`Enviado con exito, Revisa el estado de tu compra :`}
+          )
         
       }
     
@@ -181,7 +185,9 @@ changeHandler = e => {
                                
 
                 </form>
-                <div className={this.state.boton}> <Modalbutton/></div>
+                <p style={{color:'#055902',fontSize:'14px', textAlign:'center'}} className='mt-3'>{this.state.Enviar}
+                <div className={this.state.boton}> <Pse/></div>
+                </p>
 
             </Card.Body>
             </Accordion.Collapse>

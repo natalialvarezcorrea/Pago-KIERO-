@@ -54,12 +54,10 @@ async componentWillMount(){
 
 
     let qData = {id: ""+user_id};
-    axios.get(`https://kieroapi.net/user/getAddress/`, { params: qData })
-    .then(res => { 
-        console.log(res.data);
-        this.setState({data: res.data})
-    })
-    .catch(error => console.log(error))
+    let res = await axios.get(`https://kieroapi.net/user/getAddress/`, { params: qData })
+
+    console.log(res.data);
+    this.setState({data: res.data})
 }
 
 onSubmitNewDirection = () => {

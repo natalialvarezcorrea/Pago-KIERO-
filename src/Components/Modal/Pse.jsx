@@ -1,19 +1,20 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
-import '../../assets/css/modalCredito.css';
+import '../../assets/css/modalPse.css';
 
 
 let uri = "";
 let destructured = [];
 
-class Factura extends React.Component {
+class Pse extends React.Component {
 
     constructor(){
         super();
         this.state = {
             data: [],
             user_id:'',
+            product: {},
             open: false
         }
     }
@@ -26,15 +27,23 @@ class Factura extends React.Component {
     };
 
     async componentWillMount(){
+        uri = window.location.href;
+        destructured = uri.substr(uri.indexOf("#")).split("/");
+        
         let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
-        this.setState({ items:response.data });
-    }
+        await this.setState({ ...this.state, product: response.data });
+      }
+     
+    
+  
   
 
     render() {
         const { data,open } = this.state;
-        const items = this.props.product;
+        const { product  } = this.state;
         
+   
+       
         console.log(open)
 
         return(
@@ -46,8 +55,8 @@ class Factura extends React.Component {
                         <h1 style={{textAlign:'center'}}>{data.state}</h1>
                         <div className='izquierdaa col-6'>
                             <div className="imagen">
-                            {Object.keys(items).length > 0 && 
-                                 items.Resultados
+                            {Object.keys(product).length > 0 && 
+                                 product.Resultados
                                 .imagenes_Producto
                                 .map((img,index) => <img key={index} className='ima img-fluid mt-3' src={img} alt=""/>)}
                             </div>
@@ -57,8 +66,8 @@ class Factura extends React.Component {
                         </div>
 
                         <div className='derechaa col-6' >
-                            <p>Precio : {Object.keys(items).length > 0 && items.Resultados.precio}</p>
-                            <p>Producto : {Object.keys(items).length > 0 && items.Resultados.titulo}</p>
+                            <p>Precio : {Object.keys(product).length > 0 && product.Resultados.precio}</p>
+                            <p>Producto : {Object.keys(product).length > 0 && product.Resultados.titulo}</p>
                             <p>Cantidad : {data.cantidad}</p> 
                             <p>Estado Transaccion : {data.responseMessage}</p>
                             <p>Fecha : {data.transactionDate}</p>
@@ -70,4 +79,4 @@ class Factura extends React.Component {
         );
     }
 }
-export default Factura;
+export default Pse;

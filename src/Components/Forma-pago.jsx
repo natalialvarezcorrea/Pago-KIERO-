@@ -8,15 +8,14 @@ import img from '../assets/img/card-credit.png'
 import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
 import axios from 'axios';
-import Modalbutton from '../Components/Modal/Modal';
-import Direcciones from '../Components/Modal/Direcciones';
+import Credito from '../Components/Modal/Credito';
 
 
 let uri = "";
 let destructured = [];
 
-
 class FormaPago extends React.Component{
+ 
   constructor(){
     super()
     this.state = {
@@ -42,6 +41,7 @@ class FormaPago extends React.Component{
         device_session_id:"",
         payer_emailError:'',
         boton:'false',
+        Enviar:'',
         product: {}
       };
   }
@@ -67,8 +67,6 @@ class FormaPago extends React.Component{
     }
 
   }
- 
- 
 
  submitHandler = e => {
     
@@ -111,8 +109,12 @@ class FormaPago extends React.Component{
   if(this.valid()){
    
     this.setState({
-      boton:'active'
+      boton:'active',
+      
     })  
+    this.setState(
+      {Enviar:`Enviado con exito, Revisa el estado de tu compra :`}
+      )
     
   }
 
@@ -122,11 +124,11 @@ class FormaPago extends React.Component{
     this.setState({ [e.target.name]: e.target.value });
   };
     render(){
-
-      const {card_number,ccv,expiration_date,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,cuotas,payer_addr1,payer_city,payer_department,card_holder,payer_addr2}=this.state;;
+      const { card_number,ccv,expiration_date,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,cuotas,payer_addr1,payer_city,payer_department,card_holder,payer_addr2 }=this.state;
       const years = []
       const year = parseInt(new Date(Date.now()).getFullYear())
-      const { product } = this.state;
+      const { product,  } = this.state;
+    
 
       for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
@@ -136,7 +138,7 @@ class FormaPago extends React.Component{
 
           
             <div className='container-fluid'>
-              <Direcciones/>
+              {/*<Direcciones/>*/}
                 <div className="row-fluid">
                     <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
                         <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -296,14 +298,21 @@ class FormaPago extends React.Component{
 
 
                                                                      
-                                                                        <button type="submit" className="btn btn-outline-danger btn-block mt-3">Enviar</button>
+                                                                        <button type="submit" className="btn btn-outline-danger btn-block mt-3" >Enviar</button>
+
+                                                                        <p style={{color:'#055902',fontSize:'14px'}} className='mt-3'> {this.state.Enviar}
+                                                                        
+                                                                        <div className={this.state.boton} > 
+                                                                     <Credito productid={destructured[2]} product={ product } />
+                                                                     
+                                                                     </div>
+                                                                     </p>
+
+                                                                        
 
                                                                       </form> 
                                                                 
-                                                                     <div className={this.state.boton}> 
-                                                                     <Modalbutton/>
                                                                      
-                                                                     </div>
   
                                                                     
                
@@ -355,4 +364,4 @@ class FormaPago extends React.Component{
 
 }
 
-export default FormaPago;
+export default  (FormaPago);
