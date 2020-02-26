@@ -33,12 +33,55 @@ class Direcciones extends React.Component{
 
 };
 
+
+ 
 async componentWillMount(){
-    axios.get(`https://kieroapi.net/user/getAddress/`)
-    .then(res => {
+
+    var destructured = [];
+    var uri = window.location.href;
+    destructured = uri.substr(uri.indexOf("#")).split("/");
+    let user_id=destructured[4];
+
+
+    let qData = {id: ""+user_id};
+    axios.get(`https://kieroapi.net/user/getAddress/`, { params: qData })
+    .then(res => { 
+        console.log(res.data);
         this.setState({data: res.data})
     })
     .catch(error => console.log(error))
+
+
+    ////////////////////////////////////////////////////////////////
+    // SI TIENE UN PARAMETRO ADICIONAL SE CREA UNA DIRECCIÓN.
+    // ESTE FRAGMENTO ES ÚNICAMENTE PARA PROBAR EL ENDPOINT "CREAR DIRECCIÓN"
+    // POR FAVOR QUITAR DATOS QUEMADOS Y OBTENERLOS DEL DOM
+    // EEL ENDPOINT RETORNA: {"message":"ok"} EN CASO DE QUE TODO ESTE BIEN
+    ////////////////////////////////////////////////////////////////
+    if(destructured.length==6){
+        const data = {
+                    user_id: user_id,
+                    name_and_lastname: "Jhoubert Rincon",
+                    department: "Bogotá D.C",
+                    city: "Bogotá",
+                    neighborhood: "Galerias",
+                    via: "Cra12-34#56",
+                    number_via: "",
+                    additional_data: "",
+                    number_contact: "3118556404" 
+                  }
+      axios.post(`https://kieroapi.net/createAddress/user/`, {data: data}, {"Content-Type": "application/json"})
+      .then(res => { 
+          console.log(res.data);
+      })
+      .catch(error => console.log(error));
+    }
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////
+    
+
+
 }
 
 
