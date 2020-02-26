@@ -56,7 +56,6 @@ class Factura extends React.Component {
                 <a  href="a"onClick={this.onOpenModal} >Ver tu Factura</a>
                 <Modal open={open} onClose={this.onCloseModal} center>
                     <div className='col-12'>
-                    <h1 style={{textAlign:'center'}}></h1>
                   <div className='izquierdaa col-6'>
                      <div className="imagen">
                          imagen

@@ -4,7 +4,6 @@ import axios from 'axios';
 import '../../assets/css/modalCredito.css';
 
 
-let uri = "";
 let destructured = [];
 
 class Factura extends React.Component {
@@ -35,12 +34,11 @@ class Factura extends React.Component {
         const { data,open } = this.state;
         const items = this.props.product;
         
-        console.log(open)
-
+    
         return(
             
             <div className='verfactura ' >
-                <p href='#' onClick={this.onOpenModal} className='facturacredito' >Ver Factura</p>
+                <p onClick={this.onOpenModal} className='facturacredito' >Ver Factura</p>
                 <Modal open={ open } onClose={this.onCloseModal} center>
                     <div className='col-12'>
                         <h1 style={{textAlign:'center'}}>{data.state}</h1>

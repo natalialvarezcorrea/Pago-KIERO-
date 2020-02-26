@@ -44,7 +44,7 @@ valid(){
 
 
   componentDidMount(){
-  axios.get(`https://kieroapi.net/pse_banks`) /*Here must be the correct endpoint */
+  axios.get(`https://kieroapi.net/pse_banks`) 
   .then(res => {
 
     this.setState({items:res.data});
@@ -73,7 +73,9 @@ submitHandler = e => {
         bank_id:this.state.bank_pseCode
       })
       .then(res => {
-
+        console.log(res.data)
+        this.setState({LinkBank:res.data})
+        
       }).catch(e => {
         console.log(e)
       })
@@ -103,7 +105,8 @@ changeHandler = e => {
 };
  
     render(){
-      const{person_type,document_type,document_number,bank_pseCode,name,email,phone}=this.state;
+      const{person_type,document_type,document_number,bank_pseCode,names,email,phone}=this.state;
+    
 
         return(
 
@@ -121,7 +124,7 @@ changeHandler = e => {
             <div className="form-group col-12">
                                     
                                   <div className="input-group col-12">
-                                     <input className="form-control" name='name' type='text' value={name}  placeholder="Nombre Completo*" required onChange={this.changeHandler}/>
+                                     <input className="form-control" name='names' type='text' value={names}  placeholder="Nombre Completo*" required onChange={this.changeHandler}/>
                                      <div className="input-group-append">                                              
                                   </div>
                               </div>
@@ -179,15 +182,18 @@ changeHandler = e => {
                                 <input className="form-control col-12" type="text" name="document_number" minLength='5' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
                                 <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>
                                 </div>
-                                <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
+                                
+                                    <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button>
+                               
+                               
           
                 
                                
 
                 </form>
-                <p style={{color:'#055902',fontSize:'14px', textAlign:'center'}} className='mt-3'>{this.state.Enviar}
+                <p style={{color:'#055902',fontSize:'14px', textAlign:'center'}} className='mt-3'>{this.state.Enviar} </p>
                 <div className={this.state.boton}> <Pse/></div>
-                </p>
+               
 
             </Card.Body>
             </Accordion.Collapse>

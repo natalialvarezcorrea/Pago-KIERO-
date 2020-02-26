@@ -41,15 +41,11 @@ class Pse extends React.Component {
     render() {
         const { data,open } = this.state;
         const { product  } = this.state;
-        
-   
-       
-        console.log(open)
 
         return(
             
             <div className='verfactura ' >
-                <p href='#' onClick={this.onOpenModal} className='facturacredito' >Ver Factura</p>
+                <a href='#' onClick={this.onOpenModal} className='facturacredito' >Ver Factura</a>
                 <Modal open={ open } onClose={this.onCloseModal} center>
                     <div className='col-12'>
                         <h1 style={{textAlign:'center'}}>{data.state}</h1>

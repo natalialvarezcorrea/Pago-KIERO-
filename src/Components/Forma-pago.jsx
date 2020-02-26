@@ -9,7 +9,7 @@ import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
-
+import Direcciones from '../Components/Modal/Direcciones'
 
 let uri = "";
 let destructured = [];
@@ -138,7 +138,7 @@ class FormaPago extends React.Component{
 
           
             <div className='container-fluid'>
-              {/*<Direcciones/>*/}
+               <Direcciones/>
                 <div className="row-fluid">
                     <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
                         <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -300,13 +300,14 @@ class FormaPago extends React.Component{
                                                                      
                                                                         <button type="submit" className="btn btn-outline-danger btn-block mt-3" >Enviar</button>
 
-                                                                        <p style={{color:'#055902',fontSize:'14px'}} className='mt-3'> {this.state.Enviar}
+                                                                       
                                                                         
                                                                         <div className={this.state.boton} > 
+                                                                        <p style={{color:'#055902',fontSize:'14px'}} className='mt-3'> {this.state.Enviar} </p>
                                                                      <Credito productid={destructured[2]} product={ product } />
                                                                      
                                                                      </div>
-                                                                     </p>
+                                                                    
 
                                                                         
 
