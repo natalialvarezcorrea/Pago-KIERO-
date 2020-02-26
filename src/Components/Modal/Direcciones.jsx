@@ -2,26 +2,21 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import '../../assets/css/modal.css'
 import axios from 'axios'
-import Formapago from '../Forma-pago'
-import { Link } from 'react-router-dom'
-
 
 class Direcciones extends React.Component{
 
   constructor(props){
     super(props);
     this.state = {
-      data: {
-        user_id:"" ,
-        name_and_lastname: "",
-        department: "",
-        city: "",
-        neighborhood: "",
-        via: "",
-        number_via: "",
-        additional_data: "",
-        number_contact: "" 
-      },
+      user_id:"" ,
+      name_and_lastname: "",
+      department: "",
+      city: "",
+      neighborhood: "",
+      via: "",
+      number_via: "",
+      additional_data: "",
+      number_contact: "",
       open:true
     }
     this.destructured = [];
@@ -32,15 +27,15 @@ class Direcciones extends React.Component{
   
   axios.post(`https://kieroapi.net/createAddress/user/`, {
 
-    user_id : this.state.dataUser.user_id,
-    name_and_lastname : this.state.dataUser.name_and_lastname,
-    department : this.state.dataUser.department,
-    city : this.state.dataUser.city,
-    neighborhood : this.state.dataUser.neighborhood,
-    via : this.state.dataUser.via,
-    number_via : this.state.dataUser.number_via,
-    additional_data : this.state.dataUser.additional_data,
-    number_contact : this.state.dataUser.number_contact
+    user_id : this.state.user_id,
+    name_and_lastname : this.state.name_and_lastname,
+    department : this.state.department,
+    city : this.state.city,
+    neighborhood : this.state.neighborhood,
+    via : this.state.via,
+    number_via : this.state.number_via,
+    additional_data : this.state.additional_data,
+    number_contact : this.state.number_contact
   }, 
   {"Content-Type": "application/json"})
   .then(res => { 
@@ -65,31 +60,6 @@ async componentWillMount(){
         this.setState({data: res.data})
     })
     .catch(error => console.log(error))
-
-
-    ////////////////////////////////////////////////////////////////
-    // SI TIENE UN PARAMETRO ADICIONAL SE CREA UNA DIRECCIÓN.
-    // ESTE FRAGMENTO ES ÚNICAMENTE PARA PROBAR EL ENDPOINT "CREAR DIRECCIÓN"
-    // POR FAVOR QUITAR DATOS QUEMADOS Y OBTENERLOS DEL DOM
-    // EEL ENDPOINT RETORNA: {"message":"ok"} EN CASO DE QUE TODO ESTE BIEN
-    //////////////////////////////////////////////////////////////// 
-    if(this.destructured.length==6){
-        const data = {
-                    user_id:"2301220" ,
-                    name_and_lastname: "Jhoubert Rincon",
-                    department: "Bogotá D.C",
-                    city: "Bogotá",
-                    neighborhood: "Galerias",
-                    via: "Cra12-34#56",
-                    number_via: "calle 36 #81-22",
-                    additional_data: "casa primer pisd",
-                    number_contact: "3118556404" 
-                  }
-      
-    }
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
 }
 
 onSubmitNewDirection = () => {
@@ -102,8 +72,7 @@ onSubmitNewDirection = () => {
 }
 
 changeHandler = e => {
-this.setState({...this.state.data,[e.target.name]: e.target.value });
-console.log(this.state)
+  this.setState({[e.target.name]: e.target.value });
 };
 
 
@@ -120,7 +89,6 @@ onCloseModal = () => {
 render(){
     const { open } = this.state;
     const { name_and_lastname, department, city, neighborhood, via,number_via,additional_data, number_contact } = this.state;
-    //const { data } = this.state;
 
     return(
       <div>
