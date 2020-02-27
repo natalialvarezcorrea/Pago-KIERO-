@@ -18,3 +18,11 @@ background-color: aqua;}
 }
 
 
+.as{background-color: white;
+    border-radius: 5px;}
+
+.compra { border: 1px solid #bdc3c7;
+          border-radius: 5px;
+          height: 300px;}
+
+.botones{float: right;}

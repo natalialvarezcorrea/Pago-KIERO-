@@ -8,31 +8,31 @@ let destructured = [];
 
 class Factura extends React.Component {
 
-    constructor(){
-        super();
-        this.state = {
-            data: [],
-            user_id:'',
-            open: false
-        }
+constructor(){
+    super();
+    this.state = {
+        data: [],
+        user_id:'',
+        open: false
     }
-    onOpenModal = () => {
-        this.setState({ open: true });
-      };
-    
-    onCloseModal = () => {
-        this.setState({ open: false });
+}
+onOpenModal = () => {
+    this.setState({ open: true });
     };
 
-    async componentWillMount(){
-        let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
-        this.setState({ items:response.data });
-    }
-  
+onCloseModal = () => {
+    this.setState({ open: false });
+};
 
-    render() {
-        const { data,open } = this.state;
-        const items = this.props.product;
+async componentWillMount(){
+    let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
+    this.setState({ items:response.data });
+}
+
+
+render() {
+    const { data,open } = this.state;
+    const items = this.props.product;
         
     
         return(
