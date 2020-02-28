@@ -1,7 +1,6 @@
-import React, { Component,Fragment } from 'react';
+import React, {Fragment } from 'react';
 import Factura from '../Components/Factura';
 import Header from '../Components/Header';
-import Footer from '../Components/Footer'
 
 class Facturacion extends React.Component{
 
@@ -13,7 +12,6 @@ class Facturacion extends React.Component{
             <Fragment>
             <Header/>
             <Factura/>
-            <Footer/>
             </Fragment>
 
         )
