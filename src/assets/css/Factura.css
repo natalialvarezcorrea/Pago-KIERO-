@@ -23,6 +23,21 @@ background-color: aqua;}
 
 .compra { border: 1px solid #bdc3c7;
           border-radius: 5px;
-          height: 300px;}
+          height:220px;
+         }
 
 .botones{float: right;}
+
+
+.producto{float: left;}
+
+.usuario{float: right;
+    }
+
+.imag{width: 150px;}
+
+.texto{float: right;}
+
+.foto{float: left;}
+
+.nombre{font-size:0.7em}
