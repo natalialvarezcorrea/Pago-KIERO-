@@ -31,7 +31,7 @@ async componentWillMount(){
     render() {
     
       const { data } = this.state;
-      console.log(data)
+     
         
         return(
 
@@ -44,16 +44,18 @@ async componentWillMount(){
 
 
                                 <div className='col-lg-12 compra mt-3'>
+                                <p className='nombre mt-2' style={{fontSize:'15px'}}>{ ` ${Object.keys(data).length > 1 && data.data.state}` }</p>
+
                                     
-                                    <p className='mt-3'>Recibiras este producto entre 3 a 5 dias habiles</p>
+                                    <p className='mt-3'>Recibiras este producto entre 3 a 5 dias hábiles</p>
 
                                         <div className='producto col-lg-6'>
 
-                                            <div className='col-4 foto'>
-                                                <img className='imag' src={Object.keys(data).length > 1 && data.data.image_product}/>
+                                            <div className='col-lg-4 col-sm-12 foto'>
+                                                <img className='imag img-fluid' src={Object.keys(data).length > 1 && data.data.image_product}/>
                                             </div>
 
-                                            <div className='col-8 texto'>
+                                            <div className='col-lg-8 col-sm-12 texto'>
 
                                                 <p className='nombre'>{ ` ${Object.keys(data).length > 1 && data.data.title_product}` }</p>
                                                 <p className='nombre'>{ ` ${Object.keys(data).length > 1 && data.data.value_transaction}` }</p>
@@ -62,7 +64,7 @@ async componentWillMount(){
 
                                         </div>
 
-                                        <div className='usuario col-lg-6'>
+                                        <div className='usuario col-lg-6 col-sm-12'>
 
                                             <p className=''>{ ` ${Object.keys(data).length > 1 && data.data.user_name}` }</p>
                                             <p className=''>{ ` ${Object.keys(data).length > 1 && data.data.transactionDate}` }</p>
@@ -73,7 +75,7 @@ async componentWillMount(){
 
                         <div className=' mt-4 mb-5 col-lg-12 '> 
                                 {/* <button type="button" className="btn btn-danger btn-sm col-lg-3 botones ml-4 mb-2">COMUNICATE CON EL VENDEDOR</button> */}
-                                 <a href='https://www.kiero.co/'><button type="button" className="btn btn-danger btn-sm  col-lg-2 botones mb-5">VER MAS PRODUCTOS</button></a> 
+                                 <a href='https://www.kiero.co/'><button type="button" className="btn btn-danger btn-sm  col-lg-2 botones mb-5">VER MÁS PRODUCTOS</button></a> 
                         </div>
 
                     </div>

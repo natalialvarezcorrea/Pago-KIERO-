@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
 import '../../assets/css/modalCredito.css';
-
+import { Link } from 'react-router-dom';
 
 let destructured = [];
 
@@ -38,7 +38,10 @@ render() {
         return(
             
             <div className='verfactura ' >
-                <p onClick={this.onOpenModal} className='facturacredito' >Ver Factura</p>
+                <Link to='/pse_result'>
+                   <p className='facturacredito' >Ver Factura</p>
+                </Link>
+                
                 <Modal open={ open } onClose={this.onCloseModal} center>
                     <div className='col-12'>
                         <h1 style={{textAlign:'center'}}>{data.state}</h1>

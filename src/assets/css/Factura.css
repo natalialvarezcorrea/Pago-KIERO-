@@ -5,7 +5,7 @@ width: 500px;}
 .derechaa{float: right;
 }
 
-.modala{height: 400px;
+.modala{
 background-color: aqua;}
 
 
@@ -21,9 +21,8 @@ background-color: aqua;}
 .as{background-color: white;
     border-radius: 5px;}
 
-.compra { border: 1px solid #bdc3c7;
+.compra { 
           border-radius: 5px;
-          height:220px;
          }
 
 .botones{float: right;}

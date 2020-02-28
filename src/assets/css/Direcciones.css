@@ -1,0 +1,13 @@
+.address_button {
+    outline:none !important;
+    text-decoration: none;
+    border-radius: 5px ;
+    border-bottom: 1px solid;
+    border: 1px solid #bdc3c7;
+    border-top: 0;
+    opacity: 0.6;
+}
+
+.address-box {
+    box-sizing: border-box;
+}
