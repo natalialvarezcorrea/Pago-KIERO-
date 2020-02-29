@@ -1,21 +1,38 @@
-.izquierdaa{float: left;
+.title{ 
+    color:white;
+    text-align: center;}
 
-width: 500px;}
+.centro{ 
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 5px;}
 
-.derechaa{float: right;
-}
+.s{ 
+    float: left;}
+       
+.a{ 
+    float: right;}
 
-.modala{height: 400px;
-background-color: aqua;}
+.v{ 
+    margin: 0 auto;}
 
+.fa{
+    background-color:#cf0a2c ;}
 
-.imagen{height:
-    220px;
-background-color: violet;}
+.row{
+  
+     margin-left: 0.5px;
+     margin-right: 0.5px;}
 
-.verfactura{
-    color: gray;
-    text-align: center;
-    cursor: pointer;
-}
+.b{
+   background-color: cornflowerblue;
+   padding:0;}
 
+.p{
+    background-color: cyan;}
+
+.border{
+    border-color: #cdcdcd !important;}
+
+.btn{
+    float: right;}

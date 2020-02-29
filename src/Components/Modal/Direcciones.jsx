@@ -1,139 +1,154 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-import '../../assets/css/modal.css'
-import axios from 'axios'
-import Formapago from '../Forma-pago'
-import { Link } from 'react-router-dom'
+import '../../assets/css/modal.css';
+import axios from 'axios';
+import '../../assets/css/Direcciones.css';
 
 
 class Direcciones extends React.Component{
 
   constructor(props){
     super(props);
-    this.state={
-      data:{},
-      nombre:'',
-      apellidos: '',
-      telefono:'',
-      ciudad:'',
-      barrio:'',
-      direccion:'',
-      open:true
+
+    this.state = { 
+      address:[],
+      user_id:"" ,
+      name_and_lastname: "",
+      department: "",
+      city: "",
+      neighborhood: "",
+      via: "",
+      number_via: "",
+      additional_data: "",
+      number_contact: "",
+      open:true,
+      address_id:0,
     }
+    this.destructured = [];
   }
 
-  submitHandler = e => {
-  e.preventDefault();
-  axios.post('https://kieroapi.net/user/getAddress/', this.state)
-  .then((response) => {
-    console.log(response);
-  }, (error) => {
-    console.log(error);
-  });
-
-};
-
-
- 
 async componentWillMount(){
+    let uri = window.location.href;
+    this.destructured = uri.substr(uri.indexOf("#")).split("/");
+    let user_id=this.destructured[4];
 
-    var destructured = [];
-    var uri = window.location.href;
-    destructured = uri.substr(uri.indexOf("#")).split("/");
-    let user_id=destructured[4];
-
-
-    let qData = {id: ""+user_id};
-    axios.get(`https://kieroapi.net/user/getAddress/`, { params: qData })
+     let qData = { id: "" + user_id};
+     await axios.get(`https://kieroapi.net/user/getUserAddress/`, {params:qData})
     .then(res => { 
-        console.log(res.data);
-        this.setState({data: res.data})
+      this.setState({address: res.data})
+      
     })
     .catch(error => console.log(error))
-
-
-    ////////////////////////////////////////////////////////////////
-    // SI TIENE UN PARAMETRO ADICIONAL SE CREA UNA DIRECCIÓN.
-    // ESTE FRAGMENTO ES ÚNICAMENTE PARA PROBAR EL ENDPOINT "CREAR DIRECCIÓN"
-    // POR FAVOR QUITAR DATOS QUEMADOS Y OBTENERLOS DEL DOM
-    // EEL ENDPOINT RETORNA: {"message":"ok"} EN CASO DE QUE TODO ESTE BIEN
-    //////////////////////////////////////////////////////////////// 
-    if(destructured.length==6){
-        const data = {
-                    user_id: user_id,
-                    name_and_lastname: "Jhoubert Rincon",
-                    department: "Bogotá D.C",
-                    city: "Bogotá",
-                    neighborhood: "Galerias",
-                    via: "Cra12-34#56",
-                    number_via: "",
-                    additional_data: "",
-                    number_contact: "3118556404" 
-                  }
-      axios.post(`https://kieroapi.net/createAddress/user/`, {data: data}, {"Content-Type": "application/json"})
-      .then(res => { 
-          console.log(res.data);
-      })
-      .catch(error => console.log(error));
-    }
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    ////////////////////////////////////////////////////////////////
-    
-
-
 }
 
 
-changeHandler = e => {
-this.setState({ [e.target.name]: e.target.value });
+onSubmitNewDirection = e => {
+  e.preventDefault();
+  
+  let data = this.state;
+
+  let uri = window.location.href;
+  this.destructured = uri.substr(uri.indexOf("#")).split("/");
+  let user_id=this.destructured[4];
+
+
+  data.user_id = user_id;
+
+  axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"})
+  .then(res => { 
+      console.log(res.data);
+      if(res.data.message === "ok"){
+        axios.get(`https://kieroapi.net/user/getUserAddress/?id=${user_id}`)
+        .then(response => {
+          console.log(response.addresses)
+        })
+        .catch( error => console.log(error))
+      }
+  })
+  .catch(error => console.log(error));
+
+  this.setState(
+    {open:false}
+  )
+}
+
+changeRBHandler = e => {
+
+  let selectedAddress=this.state.address.addresses.findIndex(function(d){return d.id==e.target.value});
+
+  this.props.cb(this.state.address.addresses[selectedAddress]);
+  
 };
 
+changeHandler = e => {
+  this.setState({[e.target.name]: e.target.value });
+}
 
 onOpenModal = () => {
     this.setState({ open: true });
 };
  
 onCloseModal = () => {
-    this.setState({ open: false });
-};
+  
+  var d = this;
+
+  setTimeout(
+      function(){
+       
+        d.setState({ open: false });
+      },450
+  );
  
+};
 
 
 render(){
     const { open } = this.state;
-    const { nombre, telefono, ciudad, barrio, direccion } = this.state;
-    //const { data } = this.state;
-
+    const { name_and_lastname, department, city, neighborhood, via,number_via,additional_data, number_contact } = this.state;
+    const { address } = this.state;
+  
+    
     return(
       <div>
-        <Modal open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
+        <Modal  open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
 
-        <div className='uno col-12'>
-          
-            <p>Selecciona direccion de envio</p>
+       
+        <div style={{fontSize: '20px', padding:'28px 34px 32px'}} className="font-weight-bold">Mis Direcciones</div> 
+      <form onSubmit={this.onSubmitNewDirection}>    
+            <div className="address_">
+                  <div className="ml-3 mr-3 mb-2 ">
+                       
+                          
+                  {Object.keys(address).length > 0 && address.addresses.map((info,index) => (<div className="row ml-3 mb-2"  key={index}>
+                        <div onClick={this.onCloseModal} className="custom-control custom-radio" >
+                            <label><input type="radio" value={info.id} onChange={this.changeRBHandler} name="address"/>
+                            <span>{info.neighborhood} {info.via} {info.number_via} {info.city} {info.department}<br/></span></label>
+                          </div>
+                        </div>
+                         ))}
+                  </div>
+          </div>
+     </form> 
+      
+     <div className='col-12'>
+               <a data-toggle="collapse" data-target="#demo" href="/" className="" style={{textAlign:'center'}}>Agregar nueva dirección</a>
+                <form id="demo" className="collapse" onSubmit={this.onSubmitNewDirection}>
+                    <p style={{color:"red", fontSize : "12px"}}>Los campos con * son obligatorios</p>
+                    <input className="form-control " name='name_and_lastname'  type="text" value={name_and_lastname} placeholder="Nombre y apellido*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='department' value={department} type="text" placeholder="Departamento*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='city' value={city} type="text" placeholder="Ciudad*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='neighborhood' value={neighborhood} type="text" placeholder="Barrio*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='via' value={via} type="text" placeholder="Dirección*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='number_via' value={number_via} type="text" placeholder="Dirección-2* " required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='number_contact' value={number_contact} type="text" placeholder="Número de Contacto*" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='additional_data' value={additional_data} type="text" placeholder="Datos adicionales" onChange={this.changeHandler}/>
+                   
 
-          <div className=' derecha col-sm-12 col-lg-4'>
-                <div className='col-12'>
-                    <div className='tex col-lg-6 col-sm-12 mt-3 a'> 
-                        
-
-                    </div>
-                </div>
-            </div>
-               <a data-toggle="collapse" data-target="#demo" href="/" className="">Agrega una direccion</a>
-                <form id="demo" className="collapse">
-                    <input className="form-control " name='nombre'  type="text" value={nombre}placeholder="Nombre y apellido*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='telefono' value={telefono} type="text" placeholder="Telefono*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='ciudad' value={ciudad} type="text" placeholder="Ciudad*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='barrio' value={barrio} type="text" placeholder="Barrio*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='direccion' value={direccion} type="text" placeholder="Direccion*" required onChange={this.changeHandler}/>
+                    <button type="submit"  onClose={this.onCloseModal} className="btn btn-outline-danger btn-block mt-3" >Agregar</button>
                 </form>
+                </div>
+          
 
-            <div className={this.state.botone}>
-                <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar</button>
-            </div>
-    </div>
    </Modal>
       </div>
     )

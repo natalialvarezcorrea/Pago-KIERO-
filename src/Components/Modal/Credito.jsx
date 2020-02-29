@@ -1,79 +1,71 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
 import axios from 'axios';
-import '../assets/css/Factura.css'
+import '../../assets/css/modalCredito.css';
+import { Link } from 'react-router-dom';
 
+let destructured = [];
 
 class Factura extends React.Component {
-    state = {
-        open: false,
-        data: []
-           
-        }
 
-    // constructor(){
-    //     super()
-    //     this.state={
-    //         data:{}
-    //     }
-    // }
-  
+constructor(){
+    super();
+    this.state = {
+        data: [],
+        user_id:'',
+        open: false
+    }
+}
+onOpenModal = () => {
+    this.setState({ open: true });
+    };
+
+onCloseModal = () => {
+    this.setState({ open: false });
+};
+
+async componentWillMount(){
+    let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
+    this.setState({ items:response.data });
+}
+
+
+render() {
+    const { data,open } = this.state;
+    const items = this.props.product;
+        
     
-   
-    onOpenModal = () => {
-        this.setState({ open: true });
-    };
-
-    onCloseModal = () => {
-        this.setState({ open: false });
-    };
-
-        async componentWillMount(){
-            let response = await axios.get(`https://kieroapi.net/product/detail/1340673`);
-            this.setState({items:response.data});
-        }
-
-          onOpenModal = () => {
-            this.setState({ open: true });
-          };
-         
-          onCloseModal = () => {
-            this.setState({ open: false });
-          };
-        
-    render() {
-        const { data } = this.state;
-        const { open } = this.state;
-        
         return(
-            <div className='verfactura mt-2' >
+            
+            <div className='verfactura ' >
+                <Link to='/pse_result'>
+                   <p className='facturacredito' >Ver Factura</p>
+                </Link>
                 
-                <a onClick={this.onOpenModal} >Ver tu Factura</a>
-                <Modal open={open} onClose={this.onCloseModal} center>
+                <Modal open={ open } onClose={this.onCloseModal} center>
                     <div className='col-12'>
-                    <h1 style={{textAlign:'center'}}>{data.state}</h1>
-                  <div className='izquierdaa col-6'>
-                     <div className="imagen">
-                         imagen
-                     </div>
+                        <h1 style={{textAlign:'center'}}>{data.state}</h1>
+                        <div className='izquierdaa col-6'>
+                            <div className="imagen">
+                            {Object.keys(items).length > 0 && 
+                                 items.Resultados
+                                .imagenes_Producto
+                                .map((img,index) => <img key={index} className='ima img-fluid mt-3' src={img} alt=""/>)}
+                            </div>
+                            <div>
+                                <p style={{textAlign:'center'}}>{data.user_name}</p>
+                            </div>
+                        </div>
 
-                     <div>
-                            <p style={{textAlign:'center'}}>{data.user_name}</p>
-                     </div>
-              
-                </div>
-
-                <div className='derechaa col-6' >
-                <p>Precio : {data.value_transaction}</p>
-                <p>Producto : {data.title_product}</p>
-                <p>Cantidad : {data.cantidad}</p> 
-                <p>Estado Transaccion : {data.responseMessage}</p>
-                <p>Fecha : {data.transactionDate}</p>
-                <p> Direccion Envio: {data.user_address}</p>
-     
-
-                </div>
-                </div>
+                        <div className='derechaa col-6' >
+                            <p>Precio : {Object.keys(items).length > 0 && items.Resultados.precio}</p>
+                            <p>Producto : {Object.keys(items).length > 0 && items.Resultados.titulo}</p>
+                            <p>Cantidad : {data.cantidad}</p> 
+                            <p>Estado Transaccion : {data.responseMessage}</p>
+                            <p>Fecha : {data.transactionDate}</p>
+                            <p>Direccion Envio: {data.user_address}</p>
+                        </div>
+                    </div>
                 </Modal> 
             </div>
         );
