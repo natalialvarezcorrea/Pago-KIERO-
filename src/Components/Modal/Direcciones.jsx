@@ -20,7 +20,7 @@ class Direcciones extends React.Component{
       number_via: "",
       additional_data: "",
       number_contact: "",
-      open:true
+      open:true,
     }
     this.destructured = [];
   }
@@ -31,10 +31,10 @@ async componentWillMount(){
     let user_id=this.destructured[4];
 
      let qData = { id: "" + user_id};
-     await axios.get(`https://kieroapi.net/user/getAddress/`, {params:qData})
-    
+     await axios.get(`https://kieroapi.net/user/getUserAddress/`, {params:qData})
     .then(res => { 
       this.setState({address: res.data})
+      console.log(res)
     })
     .catch(error => console.log(error))
 }
@@ -44,9 +44,24 @@ onSubmitNewDirection = e => {
   e.preventDefault();
   
   let data = this.state;
+
+  let uri = window.location.href;
+  this.destructured = uri.substr(uri.indexOf("#")).split("/");
+  let user_id=this.destructured[4];
+
+
+  data.user_id = user_id;
+
   axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"})
   .then(res => { 
       console.log(res.data);
+      if(res.data.message === "ok"){
+        axios.get(`https://kieroapi.net/user/getUserAddress/?id=${user_id}`)
+        .then(response => {
+          console.log(response.addresses)
+        })
+        .catch( error => console.log(error))
+      }
   })
   .catch(error => console.log(error));
 
@@ -55,6 +70,7 @@ onSubmitNewDirection = e => {
   )
 
 }
+
 
 changeHandler = e => {
   this.setState({[e.target.name]: e.target.value });
@@ -77,30 +93,28 @@ render(){
   
     return(
       <div>
-        <Modal open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
+        <Modal  open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
 
        
         <div style={{fontSize: '20px', padding:'28px 34px 32px'}} className="font-weight-bold">Mis Direcciones</div> 
 
-      <form onSubmit={this.onSubmitNewDirection}> 
-            <button type="submit" onClose={this.setState} className="address_button btn-block">
+      <form onSubmit={this.onSubmitNewDirection}>    
+            <div className="address_">
                   <div className="ml-3 mr-3 mb-2 ">
                        
-                      
-                          {Object.keys(address).length > 0 && address.address.map((info,index) => (<span key={index}>{info.via}</span>))}
-                        <div className="row ml-3 mb-2">
-                         
-                          {Object.keys(address).length > 0 && address.address.map((info,index) => (<span key={index}>{info.neighborhood}</span>))}
-            
-                          {Object.keys(address).length > 0 && address.address.map((info,index) => (<span key={index}>{info.city}</span>))}
-                         
-                          {Object.keys(address).length > 0 && address.address.map((info,index) => (<span key={index}>{info.department}</span>))}
-                     
+                          
+                  {Object.keys(address).length > 0 && address.addresses.map((info,index) => (<div className="row ml-3 mb-2">
+                        <div class="custom-control custom-radio">
+                            <input type="radio"  name="address" id={index} />
+                            <label><span>{info.neighborhood} {info.via} {info.number_via} {info.city} {info.department}<br/></span> </label>
+                          </div>
                         </div>
-                         
+                         ))}
                   </div>
-          </button>
+          </div>
           
+              
+        
 
      </form> 
       
