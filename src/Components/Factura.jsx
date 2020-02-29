@@ -38,45 +38,16 @@ async componentWillMount(){
             <div className='container mb-5' >
                 <div className='row'>
 
-                    <div className='col-lg-12 as mt-5 mb-5'>
+                    <div className='col-lg-12 factura mt-4' >
 
-                        <h5 className='mt-4' style={{color: '#424242', fontWeight:'700', fontSize: '18px'}}>RESUMEN DE LA COMPRA</h5>
+                        <h2 style={{textAlign='center'}}>Estado de la Compra</h2>
 
-
-                                <div className='col-lg-12 compra mt-3'>
-                                    
-                                    <p className='mt-3'>Recibiras este producto entre 3 a 5 dias habiles</p>
-
-                                        <div className='producto col-lg-6'>
-
-                                            <div className='col-4 foto'>
-                                                <img className='imag' src={Object.keys(data).length > 1 && data.data.image_product}/>
-                                            </div>
-
-                                            <div className='col-8 texto'>
-
-                                                <p className='nombre'>{ ` ${Object.keys(data).length > 1 && data.data.title_product}` }</p>
-                                                <p className='nombre'>{ ` ${Object.keys(data).length > 1 && data.data.value_transaction}` }</p>
-
-                                            </div>
-
-                                        </div>
-
-                                        <div className='usuario col-lg-6'>
-
-                                            <p className=''>{ ` ${Object.keys(data).length > 1 && data.data.user_name}` }</p>
-                                            <p className=''>{ ` ${Object.keys(data).length > 1 && data.data.transactionDate}` }</p>
-
-                                        </div>
-
-                                </div>
-
-                        <div className=' mt-4 mb-5 col-lg-12 '> 
-                                {/* <button type="button" className="btn btn-danger btn-sm col-lg-3 botones ml-4 mb-2">COMUNICATE CON EL VENDEDOR</button> */}
-                                 <a href='https://www.kiero.co/'><button type="button" className="btn btn-danger btn-sm  col-lg-2 botones mb-5">VER MAS PRODUCTOS</button></a> 
+                        <div className='cuadrofactura col-lg-6 mt-5'>
+gtret
                         </div>
-
+sfsf
                     </div>
+
                 </div>
             </div>
         );

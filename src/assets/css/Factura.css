@@ -18,7 +18,7 @@ background-color: aqua;}
 }
 
 
-.as{background-color: white;
+.factura{background-color: white;
     border-radius: 5px;}
 
 .compra { border: 1px solid #bdc3c7;
@@ -41,3 +41,6 @@ background-color: aqua;}
 .foto{float: left;}
 
 .nombre{font-size:0.7em}
+
+.cuadrofactura{background-color: blue;
+               margin: 0 auto;}
