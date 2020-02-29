@@ -10,6 +10,7 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
+//import ObtenerDireccion from './ObtenerDireccion';
 
 
 let uri = "";
@@ -19,6 +20,7 @@ class FormaPago extends React.Component{
  
   constructor(){
     super()
+    this.changeInfo = this.changeInfo.bind(this);
     this.state = {
         item: {},
         card_number: "",
@@ -43,8 +45,13 @@ class FormaPago extends React.Component{
         payer_emailError:'',
         boton:'false',
         Enviar:'',
-        product: {}
+        product: {},
+        address: {}
       };
+  }
+
+  changeInfo(info){
+    this.setState(info);
   }
 
   async componentWillMount(){
@@ -92,7 +99,7 @@ class FormaPago extends React.Component{
       payer_city:this.state.payer_city,
       payer_department:this.state.payer_department,
       user_id: destructured[4],
-      address_id:"61",
+      address_id:this.state.address_id,
       device_session_id:"611326d0e6ab41299435886c285d658c"
     })
       .then((response) => {
@@ -101,11 +108,9 @@ class FormaPago extends React.Component{
         console.log(error);
       });
 
-  this.setState(
-    {payer_emailError:""}
-    )
 
-  
+  this.setState({payer_emailError:""})
+
 
   if(this.valid()){
    
@@ -124,13 +129,13 @@ class FormaPago extends React.Component{
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
+
     render(){
       const { card_number,ccv,expiration_date,card_type,payer_fullname,payer_email,payer_phone,payer_document_number,payer_document_type,cuotas,payer_addr1,payer_city,payer_department,card_holder,payer_addr2 }=this.state;
       const years = []
       const year = parseInt(new Date(Date.now()).getFullYear())
-      const { product,  } = this.state;
-    
-
+      const { product  } = this.state;
+     
       for (let i = year - 20; i <= year + 20 ; i++) {
         years.push(i)                                                                       
       }
@@ -139,8 +144,7 @@ class FormaPago extends React.Component{
 
           
   <div className='container-fluid'>
-     <Direcciones/> 
-
+      <Direcciones cb={this.changeInfo}/> 
       <div className="row-fluid">
         <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
           <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -321,6 +325,19 @@ class FormaPago extends React.Component{
 
             </div>
           <ProductInfo productid={destructured[2]} product={ product }/>
+
+          <div className=' derecha col-sm-12 col-lg-4'>
+                <div className='col-12'>
+                    <div className='tex col-lg-6  col-sm-12 mt-3 a'> 
+                       
+                        <p>Dirección {this.state.via}</p>
+                        <p>Dirección #2: {this.state.number_via}</p>
+                        <p>Barrio: {this.state.neighborhood}</p>
+                        <p>Departamento: {this.state.department}</p>
+                        <p>Ciudad: {this.state.city}</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
   </div>

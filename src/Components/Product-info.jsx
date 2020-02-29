@@ -26,8 +26,10 @@ class ProductInfo extends React.Component{
                         <p className='tit'>Titulo: {Object.keys(items).length > 0 && items.Resultados.titulo}</p>
                         <p className='precio'>Precio: {Object.keys(items).length > 0 && items.Resultados.precio}</p>
                     </div>
+                    
                 </div>
-            </div>
+                
+            </div>  
         )
     }
 }

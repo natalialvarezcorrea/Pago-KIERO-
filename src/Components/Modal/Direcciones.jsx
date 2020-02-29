@@ -1,14 +1,15 @@
 import React from 'react';
 import Modal from 'react-responsive-modal';
-import '../../assets/css/modal.css'
-import axios from 'axios'
-import '../../assets/css/Direcciones.css'
+import '../../assets/css/modal.css';
+import axios from 'axios';
+import '../../assets/css/Direcciones.css';
+
 
 class Direcciones extends React.Component{
 
   constructor(props){
     super(props);
-    
+
     this.state = { 
       address:[],
       user_id:"" ,
@@ -21,6 +22,7 @@ class Direcciones extends React.Component{
       additional_data: "",
       number_contact: "",
       open:true,
+      address_id:0,
     }
     this.destructured = [];
   }
@@ -34,7 +36,7 @@ async componentWillMount(){
      await axios.get(`https://kieroapi.net/user/getUserAddress/`, {params:qData})
     .then(res => { 
       this.setState({address: res.data})
-      console.log(res)
+      
     })
     .catch(error => console.log(error))
 }
@@ -68,21 +70,35 @@ onSubmitNewDirection = e => {
   this.setState(
     {open:false}
   )
-
 }
 
+changeRBHandler = e => {
+
+  let selectedAddress=this.state.address.addresses.findIndex(function(d){return d.id==e.target.value});
+
+  this.props.cb(this.state.address.addresses[selectedAddress]);
+  
+};
 
 changeHandler = e => {
   this.setState({[e.target.name]: e.target.value });
-};
-
+}
 
 onOpenModal = () => {
     this.setState({ open: true });
 };
  
 onCloseModal = () => {
-    this.setState({ open: false });
+  
+  var d = this;
+
+  setTimeout(
+      function(){
+       
+        d.setState({ open: false });
+      },450
+  );
+ 
 };
 
 
@@ -91,31 +107,27 @@ render(){
     const { name_and_lastname, department, city, neighborhood, via,number_via,additional_data, number_contact } = this.state;
     const { address } = this.state;
   
+    
     return(
       <div>
         <Modal  open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
 
        
         <div style={{fontSize: '20px', padding:'28px 34px 32px'}} className="font-weight-bold">Mis Direcciones</div> 
-
       <form onSubmit={this.onSubmitNewDirection}>    
             <div className="address_">
                   <div className="ml-3 mr-3 mb-2 ">
                        
                           
-                  {Object.keys(address).length > 0 && address.addresses.map((info,index) => (<div className="row ml-3 mb-2">
-                        <div class="custom-control custom-radio">
-                            <input type="radio"  name="address" id={index} />
-                            <label><span>{info.neighborhood} {info.via} {info.number_via} {info.city} {info.department}<br/></span> </label>
+                  {Object.keys(address).length > 0 && address.addresses.map((info,index) => (<div className="row ml-3 mb-2"  key={index}>
+                        <div onClick={this.onCloseModal} className="custom-control custom-radio" >
+                            <label><input type="radio" value={info.id} onChange={this.changeRBHandler} name="address"/>
+                            <span>{info.neighborhood} {info.via} {info.number_via} {info.city} {info.department}<br/></span></label>
                           </div>
                         </div>
                          ))}
                   </div>
           </div>
-          
-              
-        
-
      </form> 
       
      <div className='col-12'>
