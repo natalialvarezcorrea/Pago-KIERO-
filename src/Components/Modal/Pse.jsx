@@ -63,9 +63,9 @@ render() {
                             <p>Precio : {Object.keys(product).length > 0 && product.Resultados.precio}</p>
                             <p>Producto : {Object.keys(product).length > 0 && product.Resultados.titulo}</p>
                             <p>Cantidad : {data.cantidad}</p> 
-                            <p>Estado Transaccion : {data.responseMessage}</p>
+                            <p>Estado Transacción : {data.responseMessage}</p>
                             <p>Fecha : {data.transactionDate}</p>
-                            <p>Direccion Envio: {data.user_address}</p>
+                            <p>Direccion Envío: {data.user_address}</p>
                         </div>
                     </div>
                 </Modal> 

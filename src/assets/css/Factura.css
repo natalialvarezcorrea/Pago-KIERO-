@@ -1,46 +1,38 @@
-.izquierdaa{float: left;
+.title{ 
+    color:white;
+    text-align: center;}
 
-width: 500px;}
-
-.derechaa{float: right;
-}
-
-.modala{height: 400px;
-background-color: aqua;}
-
-
-
-
-.verfactura{
-    color: gray;
-    text-align: center;
-    cursor: pointer;
-}
-
-
-.factura{background-color: white;
+.centro{ 
+    margin: 0 auto;
+    background-color: white;
     border-radius: 5px;}
 
-.compra { border: 1px solid #bdc3c7;
-          border-radius: 5px;
-          height:220px;
-         }
+.s{ 
+    float: left;}
+       
+.a{ 
+    float: right;}
 
-.botones{float: right;}
+.v{ 
+    margin: 0 auto;}
 
+.fa{
+    background-color:#cf0a2c ;}
 
-.producto{float: left;}
+.row{
+  
+     margin-left: 0.5px;
+     margin-right: 0.5px;}
 
-.usuario{float: right;
-    }
+.b{
+   background-color: cornflowerblue;
+   padding:0;}
 
-.imag{width: 150px;}
+.p{
+    background-color: cyan;}
 
-.texto{float: right;}
+.border{
+    border-color: #cdcdcd !important;}
 
-.foto{float: left;}
-
-.nombre{font-size:0.7em}
-
-.cuadrofactura{background-color: blue;
-               margin: 0 auto;}
+.btn{
+    float: right;}

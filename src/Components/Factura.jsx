@@ -31,25 +31,74 @@ async componentWillMount(){
     render() {
     
       const { data } = this.state;
-      console.log(data)
+     
         
         return(
 
-            <div className='container mb-5' >
+
+
+            <div className='container mt-5 ' >
+                
                 <div className='row'>
 
-                    <div className='col-lg-12 factura mt-4' >
+                <div className='col-lg-12 col-sm-12 centro mt-5'>
+          
+                   
+                    <p className='title  fa mt-5'>RESULTADOS DE LA OPERACION</p>
+                   
 
-                        <h2 style={{textAlign='center'}}>Estado de la Compra</h2>
+           
+                            <div className='row border'>
+                            <div class="col s border">Empresa </div>
+                            <div class="col a border">Kiero sas</div>
+                            
 
-                        <div className='cuadrofactura col-lg-6 mt-5'>
-gtret
-                        </div>
-sfsf
+                          
+                            <div class="w-100"></div>
+                            <div class="col s border">NIT </div>
+                            <div class="col a border">900575607-2</div>
+                            
+                            
+                            <div class="w-100"></div>
+                            <div class="col s border">Fecha </div>
+                            <div class="col a border">{ ` ${Object.keys(data).length > 1 && data.data.transactionDate}` }</div>
+        
+                            <div class="w-100"></div>
+                            <div class="col s border">Estado </div>
+                            <div class="col a border">{ ` ${Object.keys(data).length > 1 && data.data.state}` }</div>
+
+                            <div class="w-100"></div>
+                            <div class="col s border">Referencia de pedido </div>
+                            <div class="col a border">{ ` ${Object.keys(data).length > 1 && data.data.code}` }</div>
+
+                            <div class="w-100"></div>
+                            <div class="col s border">Referencia de transaccion </div>
+                            <div class="col a border">{ ` ${Object.keys(data).length > 1 && data.data.orderID}` }</div>
+
+                            <div class="w-100"></div>
+                            <div class="col s border">Referencia de Banco </div>
+                            <div class="col a border">{ ` ${Object.keys(data).length > 1 && data.data.transactionID}` }</div>
+
+                            <div class="w-100"></div>
+                            <div class="col s border"> Valor </div>
+                            <div class="col a border">{ ` $: ${Object.keys(data).length > 1 && data.data.value_transaction}` }</div>
+
+                            </div>
+
+                            <button type="button" className="btn btn-danger btn-sm mt-3 mb-4"  onClick={window.print} >IMPRIMIR</button>
+                       
+
                     </div>
 
-                </div>
+                    
+
+
+                    </div>
+
             </div>
+          
+
+
         );
     }
 

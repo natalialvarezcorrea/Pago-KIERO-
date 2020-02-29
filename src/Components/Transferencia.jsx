@@ -5,7 +5,7 @@ import '../assets/css/FormaPago.css';
 import axios from 'axios'
 import Pse from '../Components/Modal/Pse';
 import '../assets/css/Transferencia.css';
-import { Redirect } from 'react-router-dom'
+
 
 
 class Transferencia extends React.Component{
@@ -146,7 +146,7 @@ changeHandler = e => {
             <select id="kindperson" className="form-control sel" name='person_type' value={person_type} onChange={this.changeHandler} required>
 
             <option defaultValue >Tipo persona</option>
-            <option value={"J"} >Juridica</option>
+            <option value={"J"} >Jurídica</option>
             <option value={"N"} >Natural</option>
 
             </select>
@@ -171,7 +171,7 @@ changeHandler = e => {
           </div>
 
           <div className="form-group col-12">
-            <input className="form-control col-12" type="text" name="document_number" minLength='5' maxLength='40' value={document_number} placeholder="Numero documento*"  onChange={this.changeHandler} required/>
+            <input className="form-control col-12" type="text" name="document_number" minLength='5' maxLength='40' value={document_number} placeholder="Número documento*"  onChange={this.changeHandler} required/>
             <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>
           </div>
 

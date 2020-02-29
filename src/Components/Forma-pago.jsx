@@ -11,6 +11,7 @@ import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
 
+
 let uri = "";
 let destructured = [];
 
@@ -95,7 +96,7 @@ class FormaPago extends React.Component{
       device_session_id:"611326d0e6ab41299435886c285d658c"
     })
       .then((response) => {
-
+        console.log(response.data)
       }, (error) => {
         console.log(error);
       });
@@ -138,7 +139,7 @@ class FormaPago extends React.Component{
 
           
   <div className='container-fluid'>
-    <Direcciones/>
+     <Direcciones/> 
 
       <div className="row-fluid">
         <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
@@ -167,7 +168,7 @@ class FormaPago extends React.Component{
 
                                 <div className="input-group mr-5">
 
-                                  <input className="form-control" name='card_number' type='text' value={card_number}  placeholder="Numero tarjeta*" minLength='16' maxLength='40' required onChange={this.changeHandler}/>
+                                  <input className="form-control" name='card_number' type='text' value={card_number}  placeholder="Número tarjeta*" minLength='16' maxLength='40' required onChange={this.changeHandler}/>
                                   <div className="input-group-append">                                              
                                   </div>
                                 </div>
@@ -241,7 +242,7 @@ class FormaPago extends React.Component{
 
 
                                 <div className="input-group mt-2">
-                                  <input className="form-control" type="number" name="payer_document_number" value={payer_document_number} placeholder="Numero documento*" required onChange={this.changeHandler}/>
+                                  <input className="form-control" type="number" name="payer_document_number" value={payer_document_number} placeholder="Número documento*" required onChange={this.changeHandler}/>
                                   <div className="input-group-append">                                              
                                   </div>
                                 </div>
@@ -266,13 +267,13 @@ class FormaPago extends React.Component{
                                 </div>
 
                                 <div className="input-group mt-2">
-                                  <input className="form-control" type="text" name='payer_addr1' value={payer_addr1} placeholder="Direccion-1*" required onChange={this.changeHandler}/>
+                                  <input className="form-control" type="text" name='payer_addr1' value={payer_addr1} placeholder="Dirección-1*" required onChange={this.changeHandler}/>
                                   <div className="input-group-append">                                              
                                   </div>
                                 </div>
 
                                 <div className="input-group mt-2">
-                                  <input className="form-control" type="text" name='payer_addr2' value={payer_addr2} placeholder="Direccion-2*" required onChange={this.changeHandler}/>
+                                  <input className="form-control" type="text" name='payer_addr2' value={payer_addr2} placeholder="Dirección-2*" required onChange={this.changeHandler}/>
                                   <div className="input-group-append">                                              
                                   </div>
                                 </div>
