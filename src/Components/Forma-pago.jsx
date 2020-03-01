@@ -10,18 +10,23 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
+import { Link } from 'react-router-dom';
+
 //import ObtenerDireccion from './ObtenerDireccion';
 
 
 let uri = "";
 let destructured = [];
 
+
 class FormaPago extends React.Component{
- 
+  
   constructor(){
     super()
     this.changeInfo = this.changeInfo.bind(this);
+
     this.state = {
+        open:false,
         item: {},
         card_number: "",
         ccv: "",
@@ -46,12 +51,20 @@ class FormaPago extends React.Component{
         boton:'false',
         Enviar:'',
         product: {},
-        address: {}
+        address: {},
+        show: false
       };
   }
 
+
+
   changeInfo(info){
     this.setState(info);
+  }
+  assignRef = (ref) => this.childRef = ref;
+
+  openmd(){
+    this.childRef.onOpenModal();
   }
 
   async componentWillMount(){
@@ -126,6 +139,10 @@ class FormaPago extends React.Component{
 
   };
 
+onOpenModal = () => {
+    this.setState({ open: true });
+};
+
   changeHandler = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -144,7 +161,7 @@ class FormaPago extends React.Component{
 
           
   <div className='container-fluid'>
-      <Direcciones cb={this.changeInfo}/> 
+      <Direcciones ref={this.assignRef} cb={this.changeInfo}/> 
       <div className="row-fluid">
         <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
           <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
@@ -273,7 +290,9 @@ class FormaPago extends React.Component{
                                 <div className="input-group mt-2">
                                   <input className="form-control" type="text" name='payer_addr1' value={payer_addr1} placeholder="Dirección-1*" required onChange={this.changeHandler}/>
                                   <div className="input-group-append">                                              
-                                  </div>
+                      
+}
+            </div>
                                 </div>
 
                                 <div className="input-group mt-2">
@@ -318,7 +337,7 @@ class FormaPago extends React.Component{
                   </div>
 
                 <div className='pse '>
-                  <Transferencia/>
+                  <Transferencia user_id={destructured[4]} productid={destructured[2]} product={ product }/>
                 </div>
 
               </Accordion>
@@ -333,10 +352,17 @@ class FormaPago extends React.Component{
                         <p>Dirección {this.state.via}</p>
                         <p>Dirección #2: {this.state.number_via}</p>
                         <p>Barrio: {this.state.neighborhood}</p>
-                        <p>Departamento: {this.state.department}</p>
+                        <p>Departamento: {this.state.department}</p> 
                         <p>Ciudad: {this.state.city}</p>
                     </div>
                 </div>
+                
+                
+                    <button  type="button"  className="btn btn-outline-danger btn-block mt-3">
+                    <a href="javascript:location.reload();">Cambiar Direccion </a>  
+                   </button>
+        
+                      
             </div>
         </div>
     </div>

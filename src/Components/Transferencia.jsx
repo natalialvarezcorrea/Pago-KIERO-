@@ -8,6 +8,7 @@ import '../assets/css/Transferencia.css';
 
 
 
+
 class Transferencia extends React.Component{
 
   constructor(){
@@ -25,7 +26,9 @@ class Transferencia extends React.Component{
         bank_pseCode:'',
         boton:'false',
         document_numberError:'',
-        Enviar:'',
+        Enviar:''
+
+
     }
 }
 
@@ -61,13 +64,13 @@ valid(){
 submitHandler = async e => {
   e.preventDefault();
   e.target.className += " was-validated";
-
+console.log(this.props)
   let res = await axios.post('https://kieroapi.net/pse_payment', {
     names:this.state.names,
     email:this.state.email,
     phone:this.state.phone,
-    product_id:"2374824",
-    user_id:"1093",
+    product_id:this.props.productid,
+    user_id:this.props.user_id,
     person_type:this.state.person_type,
     document_type:this.state.document_type,
     document_number:this.state.document_number,
@@ -97,6 +100,7 @@ changeHandler = e => {
  
     render(){
       const{person_type,document_type,document_number,bank_pseCode,names,email,phone}=this.state;
+
     
 
         return(

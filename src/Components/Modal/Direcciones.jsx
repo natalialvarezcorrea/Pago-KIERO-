@@ -5,11 +5,12 @@ import axios from 'axios';
 import '../../assets/css/Direcciones.css';
 
 
+
 class Direcciones extends React.Component{
 
   constructor(props){
     super(props);
-
+    
     this.state = { 
       address:[],
       user_id:"" ,
@@ -25,6 +26,7 @@ class Direcciones extends React.Component{
       address_id:0,
     }
     this.destructured = [];
+
   }
 
 async componentWillMount(){
@@ -75,7 +77,6 @@ onSubmitNewDirection = e => {
 changeRBHandler = e => {
 
   let selectedAddress=this.state.address.addresses.findIndex(function(d){return d.id==e.target.value});
-
   this.props.cb(this.state.address.addresses[selectedAddress]);
   
 };
@@ -143,7 +144,7 @@ render(){
                     <input className="form-control mt-3" name='number_contact' value={number_contact} type="text" placeholder="Número de Contacto*" required onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='additional_data' value={additional_data} type="text" placeholder="Datos adicionales" onChange={this.changeHandler}/>
                    
-
+                    
                     <button type="submit"  onClose={this.onCloseModal} className="btn btn-outline-danger btn-block mt-3" >Agregar</button>
                 </form>
                 </div>
