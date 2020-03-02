@@ -1,138 +1,106 @@
 import React from 'react';
-import Accordion from 'react-bootstrap/Accordion'
-import {Card } from 'react-bootstrap';
-import '../assets/css/FormaPago.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import ProductInfo from "../Components/Product-info";
-import axios from 'axios'
+import '../assets/css/Efecty.css';
+import axios from 'axios';
 
-
-let uri = "";
-let destructured = [];
 
 class Efecty extends React.Component{
     constructor(){
         super()
-
         this.state={
-            
-            payer_fullname:'',
+            product_id:'',
+            user_id:'',
+            address_id: '',
+            names:'',
             last_name:'',
-            payer_document_type:'',
-            payer_document_number:''
+            document_type:'',
+            document_number:''
         }
     }
 
-    submitHandler = e => {
-            e.preventDefault();
-            axios.post('http://localhost:5000/payment_cc' ,{
-
-            })
-
+    submitHandler = async e => {
+        e.preventDefault();
+        axios.post('http://localhost:5000/payment_cc', {
+            names:this.state.names,
+            last_name:this.state.last_name,
+            document_type:this.state.document_type,
+            document_number:this.state.document_number
+        })
+        .then(res => {
+          console.log(res.data)
+        })
+        .catch(error => console.log(error))
     }
 
-    async componentWillMount(){
-        uri = window.location.href;
-        destructured = uri.substr(uri.indexOf("#")).split("/");
-        
-        let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
-        await this.setState({ ...this.state, product: response.data });
-      }
+    changeHandler = e => {
+        this.setState({ [e.target.name]: e.target.value });
+      };
+
     render(){
-        const { product  } = this.state;
+        const { names, last_name, document_type, document_number } = this.state;
+
         return(
-                    
-  <div className='container-fluid'>
-  <div className="row-fluid">
-    <div className='col-lg-9 col-md-10 col-sm-12 contenedor '>
-      <div className="izquierda col-sm-12 col-md-12 col-lg-7 ">
-        <p className='titulo'>Elige la forma de pago</p>
 
-          <Accordion >
-            <div className=''>
-              <Card>
-              <Accordion.Toggle as={Card.Header} variant="link" eventKey="0" className='tamano'>
-                Pago Por Efecty
-              </Accordion.Toggle>
+    <div className="container-fluid">
+		    <div className="container">
+			    <div className="formBox">
+				    <form onSubmit={this.submitHandler}>
+						<div className="row">
+							<div className="col-sm-12">
+								<h2>Pago con Efecty</h2>
+							</div>
+						</div>
 
-                <Accordion.Collapse eventKey="0" className='collap'>
-                  <div className='cont '>
-                    <div className='cred col-md-12 col-sm-12 col-lg-8'>
-                      <Card.Body   >
+						<div className="row">
+							<div className="col-sm-6">
+								<div className="inputBox ">
+									<input type="text" name="names"  value={names} placeholder="Nombre" className="input" required onChange={this.changeHandler}/>
+								</div>
+							</div>
 
-                      <p>Pago por Efecty</p> 
+							<div className="col-sm-6">
+								<div className="inputBox">
+									
+									<input type="text" name="last_name"  value={last_name} placeholder="Apellido" className="input" required onChange={this.changeHandler}/>
+								</div>
+							</div>
+						</div>
 
-                      <div className='tarjeta '>
-                        <div className=' contenido'>
+						<div className="row">
+							<div className="col-sm-6">
+								<div className="inputBox">
+									
+									<input type="text" name="document_type" value={document_type}placeholder="Tipo de documento" className="input" required onChange={this.changeHandler}/>
+                                </div>
+							</div>
+
+                            
+
+							<div className="col-sm-6">
+								<div className="inputBox">
+								
+									<input type="text" name="document_number" value={document_number} placeholder="Número de documento" className="input" required onChange={this.changeHandler}/>
+								</div>
+							</div>
+						</div>
 
 
-                          <form className="needs-validation was-validate">
 
-                            <div className="input-group mr-5">
-
-                              <input className="form-control" name='names' type='text'  placeholder="Nombre" required />
-                              <div className="input-group-append">                                              
-                              </div>
-                            </div>
-
-                            <div className="input-group mt-2">
-                              <input className="form-control" name="last_name"type="text" placeholder="Apellido*" required />
-                              <div className="input-group-append">                                              
-                              </div>
-                            </div>
-
-                            <div className="input-group mt-2">
-
-                            </div>
-                            <div className="input-group mt-2">
-                              <input className="form-control" type="number" name="payer_document_number"  placeholder="Número documento*" required />
-                              <div className="input-group-append">                                              
-                              </div>
-                            </div>
-
-                    
-                    
-
-                            <button type="submit" className="btn btn-outline-danger btn-block mt-3" >Enviar</button>
-                          </form> 
-
-                        </div>
-                      </div>
-                    </Card.Body>
-                    </div>
-
-                        <div className='col-lg-4 col-md-5 col-sm-2  n'>
-                        <img alt='' className='img-fluid '/>   
-                        </div>
-
-                  </div>
-
-                </Accordion.Collapse>
-
-              </Card>
-            </div>
-
-     
-
-          </Accordion>
-
-        </div>
-        <ProductInfo productid={destructured[2]} product={ product }/>
-
-      <div className=' derecha col-sm-12 col-lg-4'>
-        
-            
-            
-                <button  type="button"  className="btn btn-outline-danger btn-block mt-3">
-                <a href="javascript:location.reload();">Cambiar Direccion </a>  
-               </button>
+						<div className="row">
+							<div className="col-sm-12">
+                            
+                            <button type="submit" 
+                                    className="btn btn-outline-danger btn-block mt-3">
+                                Comprar
+                            </button>
+							
+							</div>
+						</div>
+				</form>
+			</div>
+		</div>
+	</div>
     
-                  
-        </div>
-    </div>
-</div>
-</div>
-        )
+    )
     }
 }
-export default Efecty;
+export default  Efecty;

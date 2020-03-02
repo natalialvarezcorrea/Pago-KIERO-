@@ -4,8 +4,8 @@ import baloto from '../assets/img/baloto.png';
 import { Card } from 'react-bootstrap';
 import Accordion from 'react-bootstrap/Accordion'
 import '../assets/css/FormaPago.css';
-import Modalbutton from './Modal/Modal';
 import '../assets/css/Efectivo.css';
+import { Link } from 'react-router-dom';
 
 
 
@@ -13,16 +13,16 @@ class Efectivo extends React.Component{
 
   constructor(){
     super()
-    this.state={
-      boton:'false',
-    }
+    // this.state={
+    //   boton:'false',
+    // }
   }
 
-  onOpenButton = () => {
-    this.setState({
-      boton:'active'
-    }) 
-  };
+  // onOpenButton = () => {
+  //   this.setState({
+  //     boton:'active'
+  //   }) 
+  // };
 
     render(){
 
@@ -37,14 +37,16 @@ class Efectivo extends React.Component{
             <Card.Body>
               <div className='content'>
               <div className='efecty col-6'>
-                <img alt='' className='img-efecty img-fluid' src={efecty} onClick={this.onOpenButton}/>
+                <Link to="/efecty">
+                <img alt='' className='img-efecty img-fluid' src={efecty} />
+                </Link>
               </div>
               <div className='baloto col-6'>
-              <img alt='' className='img-baloto img-fluid' src={baloto} onClick={this.onOpenButton} />
+                <Link to="/efecty">
+                  <img alt='' className='img-baloto img-fluid' src={baloto} />
+                </Link>
               </div>
               </div>
-
-              <div className={this.state.boton}> <Modalbutton/></div>
             </Card.Body>
             </Accordion.Collapse>
         </Card>

@@ -10,7 +10,7 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
-import Modalbutton from './Modal/Modal';
+
 
 let uri = '';
 let destructured = [];
@@ -314,7 +314,7 @@ class FormaPago extends React.Component {
                                                                                onChange={this.changeHandler}/>
                                                                         <div className="input-group-append">
 
-                                                                            }
+                                                                            
                                                                         </div>
                                                                     </div>
                                                                     <div className="input-group mt-2">

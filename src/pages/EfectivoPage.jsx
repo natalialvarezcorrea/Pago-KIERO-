@@ -2,6 +2,7 @@ import React, {Fragment } from 'react';
 import Efecty from '../Components/Efecty';
 import Header from '../Components/Header';
 
+
 class EfectyPage extends React.Component{
 
 
