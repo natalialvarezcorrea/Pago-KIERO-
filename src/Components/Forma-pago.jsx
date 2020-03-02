@@ -10,9 +10,8 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
-import { Link } from 'react-router-dom';
 
-//import ObtenerDireccion from './ObtenerDireccion';
+
 
 
 let uri = "";

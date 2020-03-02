@@ -7,7 +7,8 @@ import Pse from '../Components/Modal/Pse';
 import '../assets/css/Transferencia.css';
 
 
-
+let uri = "";
+let destructured = [];
 
 class Transferencia extends React.Component{
 
@@ -27,8 +28,6 @@ class Transferencia extends React.Component{
         boton:'false',
         document_numberError:'',
         Enviar:''
-
-
     }
 }
 
@@ -48,6 +47,8 @@ valid(){
 
 
   componentDidMount(){
+    uri = window.location.href;
+    destructured = uri.substr(uri.indexOf("#")).split("/");
   axios.get(`https://kieroapi.net/pse_banks`) 
   .then(res => {
 
@@ -69,8 +70,8 @@ console.log(this.props)
     names:this.state.names,
     email:this.state.email,
     phone:this.state.phone,
-    product_id:this.props.productid,
-    user_id:this.props.user_id,
+    product_id:destructured[2],
+    user_id:destructured[4],
     person_type:this.state.person_type,
     document_type:this.state.document_type,
     document_number:this.state.document_number,
@@ -78,7 +79,7 @@ console.log(this.props)
   });
 
   this.setState({LinkBank:res.data})
-  
+    
   this.setState(
     {document_numberError:""}
   )
