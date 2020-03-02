@@ -26,7 +26,7 @@ class Pago extends React.Component{
                   <AlertProvider template={AlertTemplate} {...options}>
                 <Header/>
               
-                <FormaPago/>
+                 <FormaPago/> 
          
                <Footer/>
                </AlertProvider>

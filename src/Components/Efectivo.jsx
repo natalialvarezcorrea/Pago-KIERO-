@@ -40,7 +40,7 @@ class Efectivo extends React.Component{
                 <img alt='' className='img-efecty img-fluid' src={efecty} onClick={this.onOpenButton}/>
               </div>
               <div className='baloto col-6'>
-         <img alt='' className='img-baloto img-fluid' src={baloto} onClick={this.onOpenButton} />
+              <img alt='' className='img-baloto img-fluid' src={baloto} onClick={this.onOpenButton} />
               </div>
               </div>
 
