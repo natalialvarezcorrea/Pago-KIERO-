@@ -34,17 +34,17 @@ async componentWillMount(){
     this.destructured = uri.substr(uri.indexOf("#")).split("/");
     let user_id=this.destructured[4];
 
-     let qData = { id: "" + user_id};
+     let qData = { id: "" + user_id };
+
      await axios.get(`https://kieroapi.net/user/getUserAddress/`, {params:qData})
     .then(res => { 
       this.setState({address: res.data})
-      
     })
     .catch(error => console.log(error))
 }
 
 
-onSubmitNewDirection = e => {
+onSubmitNewDirection = async e => {
   e.preventDefault();
   
   let data = this.state;
@@ -56,29 +56,20 @@ onSubmitNewDirection = e => {
 
   data.user_id = user_id;
 
-  axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"})
-  .then(res => { 
-      console.log(res.data);
-      if(res.data.message === "ok"){
-        axios.get(`https://kieroapi.net/user/getUserAddress/?id=${user_id}`)
-        .then(response => {
-          console.log(response.addresses)
-        })
-        .catch( error => console.log(error))
-      }
-  })
-  .catch(error => console.log(error));
+  let res = await axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"})
+  
+  if(res.data.message === "ok"){
+    await axios.get(`https://kieroapi.net/user/getUserAddress/?id=${user_id}`)
+  }
 
-  this.setState(
-    {open:false}
-  )
+  this.setState({open:false})
 }
 
-changeRBHandler = e => {
 
-  let selectedAddress=this.state.address.addresses.findIndex(function(d){return d.id==e.target.value});
-  this.props.cb(this.state.address.addresses[selectedAddress]);
-  
+
+changeRBHandler = e => {
+  let selectedAddress = this.state.address.addresses.find( d => d.id==e.target.value );
+  this.props.cb(selectedAddress);
 };
 
 changeHandler = e => {
@@ -150,7 +141,7 @@ render(){
                 </div>
           
 
-   </Modal>
+        </Modal>
       </div>
     )
  }

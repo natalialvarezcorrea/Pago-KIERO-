@@ -20,6 +20,7 @@ class FormaPago extends React.Component {
     constructor() {
         super();
         this.changeInfo = this.changeInfo.bind(this);
+       
         this.state = {
             open: false,
             item: {},
@@ -52,12 +53,19 @@ class FormaPago extends React.Component {
         };
     }
 
-    changeInfo(info) {
-        this.setState(info);
+    // changeInfo(info) {
+    //     this.setState(info);
+    //  }
+
+    async changeInfo(info) {
+        await this.setState({...this.state, address: info});
     }
 
-    assignRef = (ref) => this.childRef = ref;
 
+    assignRef = (ref) => {
+        this.childRef = ref;
+    } 
+    
     openmd() {
         this.childRef.onOpenModal();
     }
@@ -105,7 +113,7 @@ class FormaPago extends React.Component {
             payer_city: this.state.payer_city,
             payer_department: this.state.payer_department,
             user_id: destructured[4],
-            address_id: this.state.address_id,
+            address:this.state.address.id,
             device_session_id: '611326d0e6ab41299435886c285d658c'
         })
             .then((response) => {
@@ -360,7 +368,7 @@ class FormaPago extends React.Component {
                                 </div>
                                 <div className='pse '>
                                     <Transferencia user_id={destructured[4]} productid={destructured[2]}
-                                                   product={product}/>
+                                                   product={product} address_id = {this.state.address.id}/>
                                 </div>
                             </Accordion>
                         </div>
@@ -368,11 +376,11 @@ class FormaPago extends React.Component {
                         <div className=' derecha col-sm-12 col-lg-4'>
                             <div className='col-12'>
                                 <div className='tex col-lg-6  col-sm-12 mt-3 a'>
-                                    <p>Dirección {this.state.via}</p>
-                                    <p>Dirección #2: {this.state.number_via}</p>
-                                    <p>Barrio: {this.state.neighborhood}</p>
-                                    <p>Departamento: {this.state.department}</p>
-                                    <p>Ciudad: {this.state.city}</p>
+                                    <p>Dirección {this.state.address.via}</p>
+                                    <p>Dirección #2: {this.state.address.number_via}</p>
+                                    <p>Barrio: {this.state.address.neighborhood}</p>
+                                    <p>Departamento: {this.state.address.department}</p>
+                                    <p>Ciudad: {this.state.address.city}</p>
                                 </div>
                             </div>
                             <button type="button" onClick={this.buttonModal}

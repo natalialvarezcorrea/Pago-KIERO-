@@ -27,7 +27,8 @@ class Transferencia extends React.Component{
         bank_pseCode:'',
         boton:'false',
         document_numberError:'',
-        Enviar:''
+        Enviar:'',
+        address:''
     }
 }
 
@@ -49,9 +50,10 @@ valid(){
   componentDidMount(){
     uri = window.location.href;
     destructured = uri.substr(uri.indexOf("#")).split("/");
-  axios.get(`https://kieroapi.net/pse_banks`) 
-  .then(res => {
-
+    console.log(destructured)
+    axios.get(`https://kieroapi.net/pse_banks`) 
+    .then(res => {
+        
     this.setState({items:res.data});
   }
     
@@ -65,8 +67,8 @@ valid(){
 submitHandler = async e => {
   e.preventDefault();
   e.target.className += " was-validated";
-console.log(this.props)
-  let res = await axios.post('https://kieroapi.net/pse_payment', {
+  console.log(this.props)
+  let res = await axios.post('https://kieroapi.net/pse_payment', {             
     names:this.state.names,
     email:this.state.email,
     phone:this.state.phone,
@@ -75,10 +77,11 @@ console.log(this.props)
     person_type:this.state.person_type,
     document_type:this.state.document_type,
     document_number:this.state.document_number,
-    bank_id:this.state.bank_pseCode
+    bank_id:this.state.bank_pseCode, 
+    address:this.props.address_id
   });
 
-  this.setState({LinkBank:res.data})
+  this.setState({LinkBank:res.data} )
     
   this.setState(
     {document_numberError:""}
@@ -101,7 +104,7 @@ changeHandler = e => {
  
     render(){
       const{person_type,document_type,document_number,bank_pseCode,names,email,phone}=this.state;
-
+     
     
 
         return(
@@ -180,7 +183,7 @@ changeHandler = e => {
             <p style={{color:'red',fontSize:'14px'}}> {this.state.document_numberError}</p>
           </div>
 
-          <a><button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button></a> 
+          <button type="submit" className="btn btn-outline-danger btn-block mt-3">Continuar Compra</button> 
 
         </form>
 
