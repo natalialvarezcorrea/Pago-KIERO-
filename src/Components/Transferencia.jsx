@@ -28,7 +28,8 @@ class Transferencia extends React.Component{
         boton:'false',
         document_numberError:'',
         Enviar:'',
-        address_id:''
+        address_id:'', 
+        device_session_id: localStorage.getItem('md5')
     }
 }
 
@@ -50,6 +51,8 @@ valid(){
   componentDidMount(){
     uri = window.location.href;
     destructured = uri.substr(uri.indexOf("#")).split("/");
+    
+
     axios.get(`https://kieroapi.net/pse_banks`) 
     .then(res => {
         
@@ -62,6 +65,8 @@ valid(){
       console.log(err)
   })
   }
+
+  
 
 submitHandler = async e => {
   e.preventDefault();
@@ -76,8 +81,10 @@ submitHandler = async e => {
     document_type:this.state.document_type,
     document_number:this.state.document_number,
     bank_id:this.state.bank_pseCode, 
-    address_id:this.props.address_id
+    address_id:this.props.address_id,
+    device_session_id:  this.state.device_session_id
   })
+ 
 
 
   this.setState({LinkBank:res.data} )

@@ -15,6 +15,7 @@ import Direcciones from '../Components/Modal/Direcciones'
 let uri = '';
 let destructured = [];
 
+
 class FormaPago extends React.Component {
 
     constructor() {
@@ -41,14 +42,14 @@ class FormaPago extends React.Component {
             payer_department: '',
             user_id: '',
             address_id: '',
-            device_session_id: '',
             payer_emailError: '',
             boton: 'false',
             Enviar: '',
             product: {},
             address: {},
             show: false,
-            showModal: false
+            showModal: false,
+            device_session_id:localStorage.getItem('md5')
         };
     }
 
@@ -95,7 +96,6 @@ class FormaPago extends React.Component {
         e.preventDefault();
         e.target.className += ' was-validated';  
 
-
        let response = await axios.post('https://kieroapi.net/cc_payment', {  
             card_number: this.state.card_number,
             ccv: this.state.ccv,
@@ -115,8 +115,9 @@ class FormaPago extends React.Component {
             payer_department: this.state.payer_department,
             user_id: destructured[4],
             address_id:this.state.address.id,
-            device_session_id: '611326d0e6ab41299435886c285d658c'
+            device_session_id: this.state.device_session_id
         })
+    
 
         console.log(response.data)
 
