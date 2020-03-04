@@ -28,7 +28,7 @@ class Transferencia extends React.Component{
         boton:'false',
         document_numberError:'',
         Enviar:'',
-        address:''
+        address_id:''
     }
 }
 
@@ -50,7 +50,6 @@ valid(){
   componentDidMount(){
     uri = window.location.href;
     destructured = uri.substr(uri.indexOf("#")).split("/");
-    console.log(destructured)
     axios.get(`https://kieroapi.net/pse_banks`) 
     .then(res => {
         
@@ -67,8 +66,7 @@ valid(){
 submitHandler = async e => {
   e.preventDefault();
   e.target.className += " was-validated";
-  console.log(this.props)
-  let res = await axios.post('https://kieroapi.net/pse_payment', {             
+  let res = await axios.post('https://kieroapi.net/pse_payment', {            
     names:this.state.names,
     email:this.state.email,
     phone:this.state.phone,
@@ -78,8 +76,9 @@ submitHandler = async e => {
     document_type:this.state.document_type,
     document_number:this.state.document_number,
     bank_id:this.state.bank_pseCode, 
-    address:this.props.address_id
-  });
+    address_id:this.props.address_id
+  })
+
 
   this.setState({LinkBank:res.data} )
     

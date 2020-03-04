@@ -23,7 +23,6 @@ class FormaPago extends React.Component {
        
         this.state = {
             open: false,
-            item: {},
             card_number: '',
             ccv: '',
             expiration_date: '',
@@ -91,11 +90,13 @@ class FormaPago extends React.Component {
 
     }
 
-    submitHandler = e => {
+    submitHandler = async  e => {
 
         e.preventDefault();
-        e.target.className += ' was-validated';
-        axios.post('https://kieroapi.net/cc_payment', {
+        e.target.className += ' was-validated';  
+
+
+       let response = await axios.post('https://kieroapi.net/cc_payment', {  
             card_number: this.state.card_number,
             ccv: this.state.ccv,
             expiration_date: this.state.expiration_date,
@@ -105,7 +106,7 @@ class FormaPago extends React.Component {
             payer_email: this.state.payer_email,
             payer_phone: this.state.payer_phone,
             payer_document_number: this.state.payer_document_number,
-            payer_document_type: this.state.payer_type,
+            payer_document_type: this.state.payer_document_type,
             cuotas: this.state.cuotas,
             product_id: destructured[2],
             payer_addr1: this.state.payer_addr1,
@@ -113,14 +114,11 @@ class FormaPago extends React.Component {
             payer_city: this.state.payer_city,
             payer_department: this.state.payer_department,
             user_id: destructured[4],
-            address:this.state.address.id,
+            address_id:this.state.address.id,
             device_session_id: '611326d0e6ab41299435886c285d658c'
         })
-            .then((response) => {
-                console.log(response.data)
-            }, (error) => {
-                console.log(error);
-            });
+
+        console.log(response.data)
 
         this.setState({payer_emailError: ''});
 
