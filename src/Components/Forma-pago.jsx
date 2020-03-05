@@ -363,7 +363,7 @@ class FormaPago extends React.Component {
                                     </Card>
                                 </div>
                                 <div className='efectivo '>
-                                    <Efectivo/>
+                                    <Efectivo user_id={destructured[4]} productid={destructured[2]} address_id={this.state.address.id}/>
                                 </div>
                                 <div className='pse '>
                                     <Transferencia user_id={destructured[4]} productid={destructured[2]}

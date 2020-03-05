@@ -26,6 +26,7 @@ class Direcciones extends React.Component{
       address_id:0,
     }
     this.destructured = [];
+    this.changeHandler=this.changeHandler.bind(this);
 
   }
 
@@ -56,7 +57,7 @@ onSubmitNewDirection = async e => {
 
   data.user_id = user_id;
 
-  let res = await axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"})
+  let res = await axios.post(`https://kieroapi.net/createAddress/user/`, {data:data}, {"Content-Type": "application/json"}) 
   
   if(res.data.message === "ok"){
     await axios.get(`https://kieroapi.net/user/getUserAddress/?id=${user_id}`)
@@ -131,7 +132,7 @@ render(){
                     <input className="form-control mt-3" name='city' value={city} type="text" placeholder="Ciudad*" required onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='neighborhood' value={neighborhood} type="text" placeholder="Barrio*" required onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='via' value={via} type="text" placeholder="Dirección*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='number_via' value={number_via} type="text" placeholder="Dirección-2* " required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='number_via' value={number_via} type="text" placeholder="Dirección-2*" onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='number_contact' value={number_contact} type="text" placeholder="Número de Contacto*" required onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='additional_data' value={additional_data} type="text" placeholder="Datos adicionales" onChange={this.changeHandler}/>
                    

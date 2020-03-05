@@ -1,2 +1,11 @@
 .content{
 height: 100px;}
+
+.botonEfecty, .botonBaloto{
+  background: none;
+  border:0;
+}
+
+.botonEfecty:focus, .botonBaloto:focus{
+    outline: 0;
+}

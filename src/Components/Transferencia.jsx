@@ -84,8 +84,6 @@ submitHandler = async e => {
     address_id:this.props.address_id,
     device_session_id:  this.state.device_session_id
   })
- 
-
 
   this.setState({LinkBank:res.data} )
     
