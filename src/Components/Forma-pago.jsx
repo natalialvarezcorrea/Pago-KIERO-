@@ -10,6 +10,7 @@ import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
 import Direcciones from '../Components/Modal/Direcciones'
+import Baloto from './Baloto';
 
 
 let uri = '';
@@ -272,7 +273,7 @@ class FormaPago extends React.Component {
                                                                         <input className="form-control"
                                                                                name="payer_fullname"
                                                                                value={payer_fullname} type="text"
-                                                                               placeholder="Nombre y Apelido*" required
+                                                                               placeholder="Nombre y Apellido*" required
                                                                                onChange={this.changeHandler}/>
                                                                         <div className="input-group-append">
                                                                         </div>
@@ -364,6 +365,7 @@ class FormaPago extends React.Component {
                                 </div>
                                 <div className='efectivo '>
                                     <Efectivo user_id={destructured[4]} productid={destructured[2]} address_id={this.state.address.id}/>
+                                    
                                 </div>
                                 <div className='pse '>
                                     <Transferencia user_id={destructured[4]} productid={destructured[2]}
