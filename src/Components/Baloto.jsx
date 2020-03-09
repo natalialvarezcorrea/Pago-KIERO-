@@ -28,7 +28,7 @@ class ModalBaloto extends React.Component{
   
     submitHandler = async e => {
       e.preventDefault();
-      let res = await axios.post('https://kieroapi.net/cash_pay', {   
+      let res = await axios.post('https://kieroapi.net/payment_cash', {   
             paymentMethod:this.state.paymentMethod,
             user_id:this.props.user_id,
             address_id:this.props.address_id,
@@ -69,7 +69,7 @@ class ModalBaloto extends React.Component{
                         <Modal open={open} onClose={this.onCloseModal} center>                     
                         <div className='col-12'>
                             <form onSubmit={this.submitHandler}>
-                                <p style={{color:"red", fontSize : "12px"}}>Los campos con * son obligatorios</p>
+                             
                                 <input className="form-control " name='full_name'  type="text" value={full_name} placeholder="Nombre y apellido*" required onChange={this.handleData}/>
                                 <input className="form-control " name='email'  type="text" value={email} placeholder="Email*" required onChange={this.handleData}/>
                                 <input className="form-control " name='phone_number' type="text" value={phone_number} placeholder="Numero de contacto*" required onChange={this.handleData}/>  
