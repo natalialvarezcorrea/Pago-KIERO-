@@ -1,3 +1,10 @@
+if [ $# -eq 0 ]; then
+    echo "Ingrese el nombre del contenedor."
+    echo "./dockerize containername"
+    exit 1
+fi
+
+
 echo "Compiling with yarn ..."
 yarn build .
 echo "Stop $1 container from docker"
