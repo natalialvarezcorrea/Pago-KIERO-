@@ -1,5 +1,11 @@
+echo "Compiling with yarn ..."
 yarn build .
-docker stop pago 
-docker rm pago
+echo "Stop $1 container from docker"
+docker stop $1 
+echo "Removing $1 container from docker"
+docker rm $1
+echo "Building container and copying builded files into docker"
 docker build . -t react-docker
-docker run --name=pago -p 5004:80 react-docker
+echo "Creating and running $1 container"
+docker run --name=$1 -p 5004:80 react-docker
+echo "LISTO"
