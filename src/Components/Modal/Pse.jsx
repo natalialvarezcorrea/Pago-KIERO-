@@ -43,7 +43,7 @@ render() {
     return(
             
             <div className='verfactura ' >
-                <a href='#' onClick={this.onOpenModal} className='facturacredito' >Ver Factura</a>
+                <a href='a' onClick={this.onOpenModal} className='facturacredito' >Ver Factura</a>
                 <Modal open={ open } onClose={this.onCloseModal} center>
                     <div className='col-12'>
                         <h1 style={{textAlign:'center'}}>{data.state}</h1>

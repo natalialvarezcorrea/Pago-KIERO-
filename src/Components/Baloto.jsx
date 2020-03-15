@@ -38,7 +38,7 @@ class ModalBaloto extends React.Component{
             email:this.state.email,
             phone_number:this.state.phone_number
       })
-      console.log(res.data)
+      if(res.data.result.html) window.location.href = res.data.result.html
     }
      
     handleData = e => {
@@ -71,8 +71,8 @@ class ModalBaloto extends React.Component{
                             <form onSubmit={this.submitHandler}>
                              
                                 <input className="form-control " name='full_name'  type="text" value={full_name} placeholder="Nombre y apellido*" required onChange={this.handleData}/>
-                                <input className="form-control " name='email'  type="text" value={email} placeholder="Email*" required onChange={this.handleData}/>
-                                <input className="form-control " name='phone_number' type="text" value={phone_number} placeholder="Numero de contacto*" required onChange={this.handleData}/>  
+                                <input className="form-control mt-3" name='email'  type="text" value={email} placeholder="Email*" required onChange={this.handleData}/>
+                                <input className="form-control mt-3" name='phone_number' type="text" value={phone_number} placeholder="Numero de contacto*" required onChange={this.handleData}/>  
                             <button type="submit"  onClose={this.onCloseModal}   onClick={this.changeHandler.bind(this,"BALOTO")} className="btn btn-outline-danger btn-block mt-3" >Continuar</button>
                         </form>
                     </div>

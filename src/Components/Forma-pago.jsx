@@ -9,8 +9,7 @@ import Efectivo from './Efectivo';
 import Transferencia from './Transferencia';
 import axios from 'axios';
 import Credito from '../Components/Modal/Credito';
-import Direcciones from '../Components/Modal/Direcciones'
-import Baloto from './Baloto';
+import Direcciones from '../Components/Modal/Direcciones';
 
 
 let uri = '';
@@ -53,10 +52,6 @@ class FormaPago extends React.Component {
             device_session_id:localStorage.getItem('md5')
         };
     }
-
-    // changeInfo(info) {
-    //     this.setState(info);
-    //  }
 
     async changeInfo(info) {
         await this.setState({...this.state, address: info});
