@@ -66,7 +66,7 @@ class FormaPago extends React.Component {
         this.childRef.onOpenModal();
     }
 
-    async componentWillMount() {
+    async componentDidMount() {
         uri = window.location.href;
         destructured = uri.substr(uri.indexOf('#')).split('/');
 

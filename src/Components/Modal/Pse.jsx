@@ -26,7 +26,7 @@ onCloseModal = () => {
 this.setState({ open: false });
 };
 
-async componentWillMount(){
+async componentDidMount(){
 uri = window.location.href;
 destructured = uri.substr(uri.indexOf("#")).split("/");
 

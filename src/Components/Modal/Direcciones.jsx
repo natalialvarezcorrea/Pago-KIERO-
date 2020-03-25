@@ -30,7 +30,7 @@ class Direcciones extends React.Component{
 
   }
 
-async componentWillMount(){
+async componentDidMount(){
     let uri = window.location.href;
     this.destructured = uri.substr(uri.indexOf("#")).split("/");
     let user_id=this.destructured[4];
@@ -97,7 +97,7 @@ onCloseModal = () => {
 
 render(){
     const { open } = this.state;
-    const { name_and_lastname, department, city, neighborhood, via,number_via,additional_data, number_contact } = this.state;
+    const { name_and_lastname, department, city,number_via, neighborhood, via,additional_data, number_contact } = this.state;
     const { address } = this.state;
   
     
@@ -106,7 +106,8 @@ render(){
         <Modal  open={open}  showCloseIcon = {false}  onClose={this.setState} closeOnOverlayClick={false} center>
 
        
-        <div style={{fontSize: '20px', padding:'28px 34px 32px'}} className="font-weight-bold">Mis Direcciones</div> 
+        <div className="title-address">Donde quieres recibir tu compra?</div> 
+        <div className="choose-address">Elige una direccion guardada</div>
       <form onSubmit={this.onSubmitNewDirection}>    
             <div className="address_">
                   <div className="ml-3 mr-3 mb-2 ">
@@ -123,23 +124,22 @@ render(){
           </div>
      </form> 
       
-     <div className='col-12'>
-               <a data-toggle="collapse" data-target="#demo" href="/" className="" style={{textAlign:'center'}}>Agregar nueva dirección</a>
-                <form id="demo" className="collapse" onSubmit={this.onSubmitNewDirection}>
-                    <p style={{color:"red", fontSize : "12px"}}>Los campos con * son obligatorios</p>
-                    <input className="form-control " name='name_and_lastname'  type="text" value={name_and_lastname} placeholder="Nombre y apellido*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='department' value={department} type="text" placeholder="Departamento*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='city' value={city} type="text" placeholder="Ciudad*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='neighborhood' value={neighborhood} type="text" placeholder="Barrio*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='via' value={via} type="text" placeholder="Dirección*" required onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='number_via' value={number_via} type="text" placeholder="Dirección-2*" onChange={this.changeHandler}/>
-                    <input className="form-control mt-3" name='number_contact' value={number_contact} type="text" placeholder="Número de Contacto*" required onChange={this.changeHandler}/>
+     <div className='new-address'>
+               <div className="form-new-address">O ingresa una nueva dirección</div>
+                <form  onSubmit={this.onSubmitNewDirection}>
+                    <input className="form-control " name='name_and_lastname'  type="text" value={name_and_lastname} placeholder="Nombre y apellido *" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='department' value={department} type="text" placeholder="Departamento *" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='city' value={city} type="text" placeholder="Ciudad *" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='neighborhood' value={neighborhood} type="text" placeholder="Barrio *" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='via' value={via} type="text" placeholder="Dirección *" required onChange={this.changeHandler}/>
+                    <input className="form-control mt-3" name='number_via' value={number_via} type="text" placeholder="Dirección-2 *" onChange={this.changeHandler}/> 
+                    <input className="form-control mt-3" name='number_contact' value={number_contact} type="text" placeholder="Número de Contacto *" required onChange={this.changeHandler}/>
                     <input className="form-control mt-3" name='additional_data' value={additional_data} type="text" placeholder="Datos adicionales" onChange={this.changeHandler}/>
                    
                     
-                    <button type="submit"  onClose={this.onCloseModal} className="btn btn-outline-danger btn-block mt-3" >Agregar</button>
+                    <button type="submit"  onClose={this.onCloseModal} className="btn btn-danger btn-md btn-block mt-3 mb-3">Agregar dirección</button>
                 </form>
-                </div>
+      </div>
           
 
         </Modal>

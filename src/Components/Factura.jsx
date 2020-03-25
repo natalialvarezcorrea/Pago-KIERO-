@@ -18,10 +18,9 @@ constructor (){
 }
 
 
-async componentWillMount(){
+async componentDidMount(){
     uri = window.location.href;
     destructured = uri.substr(uri.indexOf("pse_result/")).split("/");
-    console.log(destructured[1])
     let data = await axios.post(`https://kieroapi.net/pse_pay_order`,{ order_id: destructured[1] });
     if (data.error) return console.error(data.message);
     this.setState({data});

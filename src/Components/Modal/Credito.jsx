@@ -24,7 +24,7 @@ onCloseModal = () => {
     this.setState({ open: false });
 };
 
-async componentWillMount(){
+async componentDidMount(){
     let response = await axios.get(`https://kieroapi.net/product/detail/${destructured[2]}`);
     this.setState({ items:response.data });
 }
